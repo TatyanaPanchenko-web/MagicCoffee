@@ -1,0 +1,46 @@
+@import "../../style/vars.scss";
+.cart-item {
+  display: flex;
+  gap: 11px;
+  margin-bottom: 15px;
+  .cart-wrapper {
+    background-color: $bgColor;
+    border-radius: 15px;
+    width: 327px;
+    padding: 17px;
+    display: flex;
+    justify-content: space-between;
+
+    .cart-img {
+      img {
+        max-height: 60px;
+      }
+    }
+    .cart-info {
+      .cart-name {
+        font-size: 12px;
+      }
+      .cart-count {
+        color: rgba(0, 0, 0, 0.57);
+      }
+    }
+    .cart-price {
+      font-size: 16px;
+    }
+  }
+  .cart-delete {
+    background-color: #ffe5e5;
+    width: 48px;
+    align-self: stretch;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    cursor: pointer;
+    .cart-delete-img {
+      background-image: url("../img/icons/delete.png");
+      width: 24px;
+      height: 24px;
+    }
+  }
+}

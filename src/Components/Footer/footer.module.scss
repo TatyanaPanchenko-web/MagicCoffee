@@ -1,0 +1,29 @@
+@import "../../style/vars.scss";
+.footer {
+  background-color: $accentColor;
+  padding: 16px 25px 22px;
+  position: fixed;
+  width: 375px;
+}
+.footer-inner {
+  border-radius: 20px;
+  background-color: #fff;
+  padding: 21px 0;
+  .footer-icons {
+    display: flex;
+    justify-content: space-evenly;
+    .footer-icon {
+      width: 21px;
+      height: 21px;
+    }
+    .icon-home {
+      background-image: url("../img/footer/home.png");
+    }
+    .icon-gift {
+      background-image: url("../img/footer/gift.png");
+    }
+    .icon-about {
+      background-image: url("../img/footer/about.png");
+    }
+  }
+}

@@ -1,0 +1,20 @@
+@import "../../style/vars.scss";
+.coffee-item {
+  border-radius: 15px;
+  background-color: $bgColor;
+  width: 154px;
+  height: 164px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  .coffee-img {
+    img {
+      width: 100%;
+    }
+  }
+  .coffee-name {
+    font-family: "DM Sans", sans-serif;
+  }
+}

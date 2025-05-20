@@ -1,0 +1,37 @@
+header {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  padding-top: 63px;
+  a {
+    color: #333;
+    text-decoration: none;
+  }
+  .header-container {
+    width: 375px;
+    padding: 0 26px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 7px;
+    .header-greeting {
+      color: #d8d8d8;
+      font-size: 14px;
+      .header-name {
+        padding-top: 2px;
+        color: #001833;
+        font-size: 18px;
+      }
+    }
+    .header-icons {
+      display: flex;
+      gap: 20px;
+      .header-cart {
+        display: block;
+        width: 26px;
+        height: 26px;
+        background-image: url("../img/header/buy.svg");
+      }
+    }
+  }
+}

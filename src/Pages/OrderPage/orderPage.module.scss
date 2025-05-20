@@ -1,0 +1,103 @@
+@import "../../style/vars.scss";
+.order-inner {
+  padding: 57px 26px 0;
+  width: 375px;
+  .order-top {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 19px;
+    gap: 115px;
+    .order-back {
+      background-image: url("../img/icons/back.png");
+      background-repeat: no-repeat;
+      width: 24px;
+      height: 24px;
+    }
+    .order-title {
+      font-size: 16px;
+    }
+  }
+  .order-img {
+    width: 325px;
+    height: 146px;
+    border-radius: 12px;
+    background-color: $bgColor;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .order-info {
+    font-family: "DM Sans", serif;
+
+    .order-info-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 21px 0;
+      border-bottom: 1px solid #f4f5f7;
+      .order-count {
+        border: 1px solid rgba(216, 216, 216, 0.4);
+        border-radius: 50px;
+        span {
+          display: inline-block;
+          padding: 7px 15px;
+          cursor: pointer;
+        }
+      }
+      .order-choose {
+        display: flex;
+        color: #d8d8d8;
+        cursor: pointer;
+      }
+      .choose-ristretto {
+        gap: 8px;
+        span {
+          border: 1px solid #d8d8d8;
+          border-radius: 50px;
+          padding: 5px 20px;
+        }
+      }
+      .choose-where {
+        gap: 30px;
+        svg {
+          fill: #d8d8d8;
+        }
+      }
+      .choose-volume {
+        gap: 28px;
+        align-items: flex-end;
+        svg {
+          fill: #d8d8d8;
+        }
+        div {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          align-items: center;
+          span {
+            font-weight: 500;
+          }
+        }
+      }
+    }
+  }
+  .order-price {
+    font-size: 16px;
+    color: #001833;
+    display: flex;
+    justify-content: space-between;
+    padding: 22px 0 10px;
+    margin-bottom: 10px;
+  }
+  .order-button {
+    background-color: $accentColor;
+    color: #fff;
+    border-radius: 30px;
+    height: 46px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+}
