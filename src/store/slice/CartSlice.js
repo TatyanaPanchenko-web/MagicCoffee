@@ -6,7 +6,13 @@ const CartSlice = createSlice({
 
   reducers: {
     addItemCart(state, action) {
-      const cartEl = state.cart.find((el) => el.id === action.payload.id);
+      console.log(action);
+      const cartEl = state.cart.find(
+        (el) =>
+          el.id === action.payload.id &&
+          el.volume === action.payload.volume &&
+          el.ristretto === action.payload.ristretto
+      );
       if (cartEl) {
         cartEl.count++;
       } else {
@@ -17,8 +23,11 @@ const CartSlice = createSlice({
       const delEl = state.cart.filter((el) => el.id !== action.payload.id);
       state.cart = delEl;
     },
+    deleteAllCart(state) {
+      state.cart = [];
+    },
   },
   // extraReducers
 });
-export const { addItemCart, deleteItemCart } = CartSlice.actions;
+export const { addItemCart, deleteItemCart, deleteAllCart } = CartSlice.actions;
 export default CartSlice.reducer;

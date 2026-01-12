@@ -1,4 +1,4 @@
-@import "../../style/vars.scss";
+@use "@/style/vars.scss";
 .finish-wrapper {
   display: flex;
   flex-direction: column;
@@ -19,6 +19,6 @@
     font-size: 22px;
   }
   .finish-subtitle {
-    color: $shadowColor;
+    color: vars.$shadowColor;
   }
 }

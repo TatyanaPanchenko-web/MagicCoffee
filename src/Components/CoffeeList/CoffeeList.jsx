@@ -1,11 +1,11 @@
-import React from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setCurrentItem } from "../../store/slice/CurrentItemSlice";
-import style from "./coffeeCart.module.scss";
+import { useNavigate } from "react-router-dom";
 
-export default function HomePage() {
+import { setCurrentItem } from "@/store/slice/CurrentItemSlice";
+import style from "./coffeeList.module.scss";
+
+export default function CoffeeList() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const getCoffeeStore = useSelector((state) => state.coffee);

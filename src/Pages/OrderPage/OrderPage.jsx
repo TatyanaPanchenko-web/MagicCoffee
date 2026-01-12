@@ -1,35 +1,31 @@
-import React from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import {
-  incCurrentItem,
-  decCurrentItem,
-} from "../../store/slice/CurrentItemSlice";
-import { addItemCart } from "../../store/slice/CartSlice";
+import { addItemCart } from "@/store/slice/CartSlice";
 import style from "./orderPage.module.scss";
 import IconsSvg from "./IconsSvg";
 
 export default function OrderPage() {
-  const [orderInfo, setOrderInfo] = useState({
-    ristretto: null,
-    where: null,
-    volume: null,
-  });
-  const navigate = useNavigate();
   const getCurrentItem = useSelector((state) => state.currentItem.currentItem);
+  const [activeItem, setActiveItem] = useState({
+    ristretto: 0,
+    where: 0,
+    volume: 0,
+  });
+  const [orderInfo, setOrderInfo] = useState({
+    count: getCurrentItem.count,
+    id: getCurrentItem.id,
+    name: getCurrentItem.name,
+    ristretto: getCurrentItem.ristretto[activeItem.ristretto],
+    where: getCurrentItem.where[activeItem.where],
+    volume: getCurrentItem.volume[activeItem.volume],
+    price: getCurrentItem.price[activeItem.volume],
+  });
+
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const addActiveStyle = (e) => {
-    const arr = e.target.parentElement.parentElement.children;
-    for (let i = 0; i < arr.length; i++) {
-      arr[i].classList.remove("active");
-    }
-    if (e.target.parentElement.classList.contains("item-check")) {
-      e.target.parentElement.classList.toggle("active");
-    }
-  };
   return (
     <div className={style["order-inner"]}>
       <div className={style["order-top"]}>
@@ -50,15 +46,17 @@ export default function OrderPage() {
           <div className={style["order-count"]}>
             <span
               onClick={() => {
-                dispatch(decCurrentItem(getCurrentItem));
+                if (orderInfo.count > 1) {
+                  setOrderInfo((prev) => ({ ...prev, count: prev.count - 1 }));
+                }
               }}
             >
               -
             </span>
-            {getCurrentItem.count}
+            {orderInfo.count}
             <span
               onClick={() => {
-                dispatch(incCurrentItem(getCurrentItem));
+                setOrderInfo((prev) => ({ ...prev, count: prev.count + 1 }));
               }}
             >
               +
@@ -66,39 +64,62 @@ export default function OrderPage() {
           </div>
         </div>
         <div className={style["order-info-item"]}>
-          <div className={style["order-ristertto"]}>Ristretto</div>
+          <div>Ristretto</div>
           <div
-            onClick={(e) => {
-              addActiveStyle(e);
-              setOrderInfo({ ...orderInfo, ristretto: e.target.innerText });
-            }}
             className={`${style["order-choose"]} ${style["choose-ristretto"]}`}
           >
-            {getCurrentItem.ristretto.map((item) => {
+            {getCurrentItem.ristretto.map((item, index) => {
               return (
-                <div class="item-check" key={item.id}>
+                <div
+                  onClick={() => {
+                    if (activeItem.ristretto === index) return;
+                    setActiveItem((prev) => ({
+                      ...prev,
+                      ristretto: index,
+                    }));
+
+                    if (activeItem.ristretto === index) return;
+
+                    setOrderInfo((prev) => ({
+                      ...prev,
+                      ristretto: getCurrentItem.ristretto[index],
+                      price: index === 1 ? prev.price + 1 : prev.price - 1,
+                    }));
+                  }}
+                  className={`${
+                    activeItem.ristretto === index ? style.active : ""
+                  }`}
+                  key={index}
+                >
                   <span>{item}</span>
                 </div>
               );
             })}
           </div>
         </div>
-        <div className={style["order-info-item"]}>
+        <div
+          className={`${style["order-info-item"]} ${style["item-takeaway"]}`}
+        >
           <div className={style["order-where"]}>Onsite / Takeaway</div>
-          <div
-            onClick={(e) => {
-              console.log(e.target);
-              addActiveStyle(e);
-              setOrderInfo({
-                ...orderInfo,
-                where: e.target.nextSibling.innerText,
-              });
-            }}
-            className={`${style["order-choose"]} ${style["choose-where"]}`}
-          >
-            {getCurrentItem.where.map((item) => {
+          <div className={`${style["order-choose"]} ${style["choose-where"]}`}>
+            {getCurrentItem.where.map((item, index) => {
               return (
-                <div class="item-check" key={item.id}>
+                <div
+                  onClick={() => {
+                    setActiveItem({
+                      ...activeItem,
+                      where: index,
+                    });
+                    setOrderInfo({
+                      ...orderInfo,
+                      where: getCurrentItem.where[index],
+                    });
+                  }}
+                  className={`${
+                    activeItem.where === index ? style.active : ""
+                  }`}
+                  key={index}
+                >
                   <IconsSvg id={`${item}`} />
                   <span style={{ display: "none" }}>{item}</span>
                 </div>
@@ -106,21 +127,28 @@ export default function OrderPage() {
             })}
           </div>
         </div>
-        <div className={style["order-info-item"]}>
+        <div className={`${style["order-info-item"]} ${style["item-volume"]}`}>
           <div className={style["order-volume"]}>Volume, ml</div>
-          <div
-            onClick={(e) => {
-              addActiveStyle(e);
-              setOrderInfo({
-                ...orderInfo,
-                volume: e.target.nextSibling.innerText,
-              });
-            }}
-            className={`${style["order-choose"]} ${style["choose-volume"]}`}
-          >
-            {getCurrentItem.volume.map((item) => {
+          <div className={`${style["order-choose"]} ${style["choose-volume"]}`}>
+            {getCurrentItem.volume.map((item, index) => {
               return (
-                <div class="item-check" key={item.id}>
+                <div
+                  onClick={() => {
+                    setActiveItem({
+                      ...activeItem,
+                      volume: index,
+                    });
+                    setOrderInfo({
+                      ...orderInfo,
+                      volume: getCurrentItem.volume[index],
+                      price: getCurrentItem.price[index],
+                    });
+                  }}
+                  className={`${
+                    activeItem.volume === index ? style.active : ""
+                  }`}
+                  key={index}
+                >
                   <IconsSvg id={`Volume${item}`} />
                   <span>{item}</span>
                 </div>
@@ -131,11 +159,14 @@ export default function OrderPage() {
       </div>
       <div className={style["order-price"]}>
         <span>Total Amount</span>
-        <span>BYN {getCurrentItem.price * getCurrentItem.count},00</span>
+        <span>
+          BYN {orderInfo.price * orderInfo.count}
+          ,00
+        </span>
       </div>
       <div
         onClick={() => {
-          dispatch(addItemCart(getCurrentItem));
+          dispatch(addItemCart(orderInfo));
           navigate("/cart");
         }}
         className={style["order-button"]}

@@ -1,8 +1,8 @@
-@import "../../style/vars.scss";
+@use "@/style/vars.scss";
 .welcomepage {
   text-align: center;
   .welcomepage-logo {
-    background-color: $accentColor;
+    background-color: vars.$accentColor;
     width: 375px;
     height: 323px;
     background-image: url("../img/icons/logo.png");
@@ -20,7 +20,7 @@
   .welcomepage-subtitle {
     font-size: 18px;
     font-weight: 400;
-    color: $shadowColor;
+    color: vars.$shadowColor;
     margin-bottom: 136px;
   }
   .welcomepage-button {
@@ -35,7 +35,7 @@
       width: 64px;
       height: 64px;
       border-radius: 50%;
-      background-color: $accentColor;
+      background-color: vars.$accentColor;
       outline: none;
       border: none;
     }

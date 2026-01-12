@@ -1,4 +1,3 @@
-import React from "react";
 import { NavLink } from "react-router-dom";
 import style from "./footer.module.scss";
 
@@ -16,9 +15,12 @@ export default function Footer() {
           <div
             className={`${style["footer-icon"]} ${style["icon-gift"]}`}
           ></div>
-          <div
-            className={`${style["footer-icon"]} ${style["icon-about"]}`}
-          ></div>
+
+          <NavLink to="/cart">
+            <div
+              className={`${style["footer-icon"]} ${style["icon-cart"]}`}
+            ></div>
+          </NavLink>
         </div>
       </div>
     </footer>

@@ -1,8 +1,8 @@
-@import "../../style/vars.scss";
+@use "@/style/vars.scss";
 .cart-inner {
   padding: 57px 26px 0;
   width: 375px;
-  .cart-top {
+   .cart-top {
     margin-bottom: 24px;
     .cart-back {
       background-image: url("./img/icons/back.png");
@@ -34,7 +34,7 @@
     }
   }
   .cart-button {
-    background-color: $accentColor;
+    background-color: vars.$accentColor;
     color: #fff;
     border-radius: 30px;
     height: 46px;

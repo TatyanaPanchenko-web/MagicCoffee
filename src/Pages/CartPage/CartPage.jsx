@@ -1,10 +1,10 @@
-import React from "react";
 import { useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addOrder } from "../../store/slice/OrderSlice";
-import { totalPrice } from "../../common/cartFunction";
-import CartItem from "../../Components/CartItem/CartItem";
+import { addOrder } from "@/store/slice/OrderSlice";
+import { deleteAllCart } from "@/store/slice/CartSlice";
+import { totalPrice } from "@/common/cartFunction";
+import CartItem from "@/Components/CartItem/CartItem";
 import style from "./cartPage.module.scss";
 
 export default function OrderPage() {
@@ -34,6 +34,7 @@ export default function OrderPage() {
         <div
           onClick={() => {
             dispatch(addOrder(getCartItems));
+             dispatch(deleteAllCart());
             navigate("/finish");
           }}
           className={style["cart-button"]}

@@ -1,8 +1,7 @@
-@import "../../style/vars.scss";
+@use "@/style/vars.scss";
 .footer {
-  background-color: $accentColor;
+  background-color: vars.$accentColor;
   padding: 16px 25px 22px;
-  position: fixed;
   width: 375px;
 }
 .footer-inner {
@@ -12,18 +11,21 @@
   .footer-icons {
     display: flex;
     justify-content: space-evenly;
+    align-items: center;
     .footer-icon {
       width: 21px;
       height: 21px;
+      background-size: fill;
+      background-position: center;
     }
     .icon-home {
-      background-image: url("../img/footer/home.png");
+      background-image: url("../img/footer/home.svg");
     }
     .icon-gift {
       background-image: url("../img/footer/gift.png");
     }
-    .icon-about {
-      background-image: url("../img/footer/about.png");
+    .icon-cart {
+      background-image: url("../img/footer/cart.svg");
     }
   }
 }

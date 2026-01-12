@@ -8,15 +8,15 @@ const CurrentItemSlice = createSlice({
     setCurrentItem(state, action) {
       state.currentItem = action.payload;
     },
-    incCurrentItem(state, action) {
-      state.currentItem.count++;
-    },
-    decCurrentItem(state, action) {
-      if (state.currentItem.count > 1) {
-        state.currentItem.count--;
-      }
-    },
-    getVolumeItem(state, action) {
+    // incCurrentItem(state, action) {
+    //   state.currentItem.count++;
+    // },
+    // decCurrentItem(state, action) {
+    //   if (state.currentItem.count > 1) {
+    //     state.currentItem.count--;
+    //   }
+    // },
+    getVolumeItem(state) {
       state.currentItem.count++;
     },
   },

@@ -1,5 +1,7 @@
+@use "vars.scss";
+
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Poppins:wght@300;400;500;600;700&display=swap");
-@import "./vars.scss";
+
 * {
   margin: 0;
   padding: 0;
@@ -12,15 +14,7 @@ body {
   font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 14px;
-  color: $mainTextColor;
+  color: vars.$mainTextColor;
 
-  .active {
-    color: #000000 !important;
-  }
-  .active svg {
-    fill: #000000 !important;
-  }
-  svg.active {
-    fill: #000000 !important;
-  }
+  
 }

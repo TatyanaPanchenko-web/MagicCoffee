@@ -15,7 +15,7 @@ header {
     align-items: center;
     margin-bottom: 7px;
     .header-greeting {
-      color: #d8d8d8;
+      color: #919191;
       font-size: 14px;
       .header-name {
         padding-top: 2px;
@@ -26,11 +26,12 @@ header {
     .header-icons {
       display: flex;
       gap: 20px;
-      .header-cart {
+      .header-profile {
         display: block;
         width: 26px;
         height: 26px;
-        background-image: url("../img/header/buy.svg");
+        background-image: url("../img/icons/profile.svg");
+        background-repeat: no-repeat;
       }
     }
   }

@@ -1,4 +1,4 @@
-@import "../../style/vars.scss";
+@use "@/style/vars.scss";
 .auth-inner {
   padding-top: 57px;
   width: 100%;
@@ -19,19 +19,23 @@
   .auth-subtitle {
     font-weight: 400;
     margin-bottom: 46px;
-    color: $shadowColor;
+    color: vars.$shadowColor;
   }
   .auth-form {
     display: flex;
+
     flex-direction: column;
     gap: 36px;
     .input-str {
       display: flex;
+      align-items: center;
       border-bottom: 1px solid #c1c7d0;
       input {
         border: none;
         outline: none;
         padding-left: 19px;
+        flex: 1 1 auto;
+        min-width: 0;
       }
       input::placeholder {
         font-family: "Poppins", sans-serif;
@@ -39,22 +43,39 @@
         color: #c1c7d0;
       }
       .email-icon {
-        background-image: url("../../assets/form/message.png");
+        background-image: url("../../img/form/message.png");
         background-position: center;
         background-repeat: no-repeat;
         width: 36px;
         height: 36px;
-        display: block;
+        flex-shrink: 0;
         border-right: 1px solid #c1c7d0;
       }
       .password-icon {
-        background-image: url("../../assets/form/lock.png");
+        background-image: url("../../img/form/lock.png");
         background-position: center;
         background-repeat: no-repeat;
         width: 36px;
         height: 36px;
         display: block;
+        flex-shrink: 0;
         border-right: 1px solid #c1c7d0;
+      }
+      .password-show {
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 17px;
+        margin-right: 20px;
+      }
+
+      .show-false {
+        background-image: url("/img/icons/eye_visible.svg");
+        width: 22px;
+      }
+      .show-true {
+        background-image: url("/img/icons/eye_hidden.svg");
+        width: 21px;
       }
     }
 
@@ -65,7 +86,7 @@
       width: 64px;
       height: 64px;
       border-radius: 50%;
-      background-color: $accentColor;
+      background-color: vars.$accentColor;
       cursor: pointer;
       margin-top: 179px;
       align-self: flex-end;
@@ -74,16 +95,16 @@
     }
   }
   .errorField {
-    color: $accentColor;
+    color: vars.$errorColor;
     font-size: 12px;
   }
   .auth-link {
     padding-top: 129px;
-    color: $shadowColor;
+    color: vars.$shadowColor;
     font-weight: 400;
     a {
       text-decoration: none;
-      color: $accentColor;
+      color: vars.$accentColor;
       font-weight: 500;
     }
   }

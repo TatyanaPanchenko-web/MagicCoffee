@@ -1,0 +1,30 @@
+@use "@/style/vars.scss";
+.terms-inner {
+  padding-top: 57px;
+  width: 100%;
+  align-self: start;
+  width: 293px;
+  .terms-back {
+    background-image: url("../img/icons/back.png");
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 24px;
+    margin-bottom: 46px;
+  }
+  .terms-container {
+    margin-bottom: 50px;
+    .terms-title {
+      font-size: 22px;
+      color: #181d2d;
+      margin-bottom: 40px;
+    }
+    .terms-subtitle {
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+    }
+    p {
+      margin-bottom: 30px;
+    }
+  }
+}

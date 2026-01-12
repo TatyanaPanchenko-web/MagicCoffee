@@ -1,0 +1,78 @@
+@use "@/style/vars.scss";
+.profile-inner {
+  padding: 57px 26px 0;
+  width: 375px;
+  .profile-top {
+    margin-bottom: 30px;
+    display: flex;
+
+    .profile-back {
+      background-image: url("./img/icons/back.png");
+      background-repeat: no-repeat;
+      width: 24px;
+      height: 24px;
+      padding-right: 130px;
+    }
+    .profile-title {
+      font-size: 20px;
+      color: #001833;
+    }
+  }
+  .profile-wrapper {
+    margin-bottom: 50px;
+    .profile-item {
+      font-weight: 600;
+      display: flex;
+      gap: 30px;
+      margin-bottom: 30px;
+      .profile-img {
+        border-radius: 50%;
+        background-color: vars.$bgColor;
+        width: 42px;
+        height: 42px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .profile-icon {
+          width: 20px;
+          height: 20px;
+          background-repeat: no-repeat;
+          background-size: contain;
+          background-position: center;
+        }
+        .icon-name {
+          background-image: url("../../../img/icons/profile.svg");
+        }
+        .icon-email {
+          background-image: url("../../../img/icons/message.svg");
+        }
+        .icon-phone {
+          background-image: url("../../../img/icons/phone.svg");
+        }
+      }
+      .profile-subtitle {
+        font-size: 12px;
+        opacity: 22%;
+      }
+      .profile-text {
+        font-weight: 600;
+      }
+    }
+  }
+  .profile-bottom {
+    display: flex;
+    justify-content: center;
+
+    .profile-button {
+      background-color: vars.$accentColor;
+      color: #fff;
+      border-radius: 30px;
+      height: 46px;
+      width: 165px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+  }
+}

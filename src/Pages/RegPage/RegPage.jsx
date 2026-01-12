@@ -1,139 +1,187 @@
-import React from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { NavLink } from "react-router-dom";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { setUser } from "../../services/fireBase";
+import { auth } from "@/services/fireBase";
+import { NavLink, Link } from "react-router-dom";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { setUser } from "@/services/fireBase";
+
+import { useSelector, useDispatch } from "react-redux";
+import {
+  activatePreloader,
+  deactivatePreloader,
+} from "@/store/slice/PreloaderSlice";
+import Preloader from "@/Pages/Preloader/Preloader";
 import style from "./regPage.module.scss";
 
-export default function RegPage({ setAuth }) {
+export default function RegPage() {
+  const [successMessage, setSuccessMessage] = useState(false);
+  const [show, setShow] = useState(false);
+  const [errAuth, setErrAuth] = useState(false);
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm();
-  const [successMessage, setSuccessMessage] = useState(false);
-  const auth = getAuth();
-  const onSubmit = (data) => {
-    createUserWithEmailAndPassword(auth, data.mail, data.password)
-      .then(() => {
-        setAuth(true);
-        setUser(data);
-        setSuccessMessage(true);
-        reset();
-      })
-      .catch((error) => {
-        console.error(error);
+
+  const isLoading = useSelector((state) => state.preloader.preloader);
+  const dispatch = useDispatch();
+  const onSubmit = async (data) => {
+    dispatch(activatePreloader());
+    setErrAuth(false);
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        data.mail,
+        data.password
+      );
+
+      const user = userCredential.user;
+
+      await updateProfile(user, {
+        displayName: data.name,
       });
-    reset();
+
+      await setUser(data, user.uid);
+      setSuccessMessage(true);
+      reset();
+    } catch (error) {
+      console.error(error);
+      setErrAuth(true);
+    } finally {
+      dispatch(deactivatePreloader());
+    }
   };
 
   return (
-    <div className={style["reg-inner"]}>
-      <NavLink to="/">
-        <div className={style["reg-back"]}></div>
-      </NavLink>
+    <>
+      <Preloader show={isLoading} />
+      <div className={style["reg-inner"]}>
+        <NavLink to="/">
+          <div className={style["reg-back"]}></div>
+        </NavLink>
 
-      {successMessage ? (
-        <div className={style["reg-success"]}>
-          <div>Registration was successful. </div>
-          <div>
-            Now you can <NavLink to="/auth">sign in</NavLink>
+        {successMessage ? (
+          <div className={style["reg-success"]}>
+            <div>Registration was successful. </div>
+            <div>
+              Now you can <NavLink to="/auth">sign in</NavLink>
+            </div>
           </div>
-        </div>
-      ) : (
-        <div className={style["reg-block"]}>
-          <div className={style["reg-title"]}>Sign up</div>
-          <div className={style["reg-subtitle"]}>Create an account here</div>
-          <form onSubmit={handleSubmit(onSubmit)} className={style["reg-form"]}>
-            <div className={style["input-str"]}>
-              <span
-                className={`${style["input-icon"]} ${style["user-icon"]}`}
-              ></span>
-              <input
-                placeholder="Name"
-                {...register("name", {
-                  required: "Must be filled in",
-                  maxLength: 30,
-                  pattern: {
-                    value: /^[A-Za-z]+$/i,
-                    message: "Incorrect characters",
-                  },
-                })}
-              />
-              {errors.name && (
-                <p className={style.errorField}>{errors.name?.message}</p>
+        ) : (
+          <div className={style["reg-container"]}>
+            <div className={style["reg-title"]}>Sign up</div>
+            <div className={style["reg-subtitle"]}>Create an account here</div>
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className={style["reg-form"]}
+            >
+              <div className={style["input-str"]}>
+                <span
+                  className={`${style["input-icon"]} ${style["user-icon"]}`}
+                ></span>
+                <input
+                  placeholder="Name"
+                  {...register("name", {
+                    required: "Must be filled in",
+                    maxLength: 30,
+                    pattern: {
+                      value: /^[A-Za-z]+$/i,
+                      message: "Incorrect characters",
+                    },
+                  })}
+                />
+                {errors.name && (
+                  <p className={style.errorField}>{errors.name?.message}</p>
+                )}
+              </div>
+              <div className={style["input-str"]}>
+                <span
+                  className={`${style["input-icon"]} ${style["mobile-icon"]}`}
+                ></span>
+                <input
+                  placeholder="Mobile Number"
+                  type="tel"
+                  {...register("phone", {
+                    required: "Must be filled in",
+                    pattern: {
+                      value: /^[0-9]+$/,
+                      message: "Incorrect characters",
+                    },
+                  })}
+                />
+                {errors.phone && (
+                  <p className={style.errorField}>{errors.phone?.message}</p>
+                )}
+              </div>
+              <div className={style["input-str"]}>
+                <span
+                  className={`${style["input-icon"]} ${style["email-icon"]}`}
+                ></span>
+                <input
+                  placeholder="Email address"
+                  type="email"
+                  {...register("mail", {
+                    required: "Must be filled in",
+                    pattern: {
+                      value: /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/,
+                      message: "Incorrect characters",
+                    },
+                  })}
+                />
+                {errors.mail && (
+                  <p className={style.errorField}>{errors.mail?.message}</p>
+                )}
+              </div>
+              <div className={style["input-str"]}>
+                <span
+                  className={`${style["input-icon"]} ${style["password-icon"]}`}
+                ></span>
+                <input
+                  placeholder="Password"
+                  type={show ? "text" : "password"}
+                  {...register("password", {
+                    required: "Must be filled in",
+                    minLength: {
+                      value: 6,
+                      message: "At least 6 characters",
+                    },
+                  })}
+                />
+                <div
+                  onClick={() => {
+                    setShow((prev) => !prev);
+                  }}
+                  className={
+                    show
+                      ? `${style["password-show"]} ${style["show-true"]}`
+                      : `${style["password-show"]} ${style["show-false"]}
+            `
+                  }
+                ></div>
+                {errors.password && (
+                  <p className={style.errorField}>{errors.password?.message}</p>
+                )}
+              </div>
+              {errAuth && (
+                <div className={style.errorField}>
+                  Registration failed: user already exists
+                </div>
               )}
+              <div className={style["reg-agree"]}>
+                By signing up you agree with our &nbsp;
+                <Link to="/terms">Terms of Use</Link>
+              </div>
+
+              <input type="submit" value="" />
+            </form>
+            <div className={style["reg-link"]}>
+              Already a member?
+              <NavLink to="/auth"> Sign in</NavLink>
             </div>
-            <div className={style["input-str"]}>
-              <span
-                className={`${style["input-icon"]} ${style["mobile-icon"]}`}
-              ></span>
-              <input
-                placeholder="Mobile Number"
-                type="tel"
-                {...register("mobile", {
-                  required: "Must be filled in",
-                  pattern: {
-                    value: /^[0-9]+$/,
-                    message: "Incorrect characters",
-                  },
-                })}
-              />
-              {errors.mobile && (
-                <p className={style.errorField}>{errors.mobile?.message}</p>
-              )}
-            </div>
-            <div className={style["input-str"]}>
-              <span
-                className={`${style["input-icon"]} ${style["email-icon"]}`}
-              ></span>
-              <input
-                placeholder="Email address"
-                type="email"
-                {...register("mail", {
-                  required: "Must be filled in",
-                  pattern: {
-                    value: /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/,
-                    message: "Incorrect characters",
-                  },
-                })}
-              />
-              {errors.mail && (
-                <p className={style.errorField}>{errors.mail?.message}</p>
-              )}
-            </div>
-            <div className={style["input-str"]}>
-              <span
-                className={`${style["input-icon"]} ${style["password-icon"]}`}
-              ></span>
-              <input
-                placeholder="Password"
-                type="password"
-                {...register("password", {
-                  required: "Must be filled in",
-                  minLength: {
-                    value: 6,
-                    message: "At least 6 characters",
-                  },
-                })}
-              />
-              {errors.password && (
-                <p className={style.errorField}>{errors.password?.message}</p>
-              )}
-            </div>
-            <div className={style["reg-agree"]}>
-              By signing up you agree with our Terms of Use
-            </div>
-            <input type="submit" value="" />
-          </form>
-          <div className={style["reg-link"]}>
-            Already a member?
-            <NavLink to="/auth"> Sign in</NavLink>
           </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </>
   );
 }

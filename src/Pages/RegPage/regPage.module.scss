@@ -1,4 +1,4 @@
-@import "../../style/vars.scss";
+@use "@/style/vars.scss";
 .reg-inner {
   padding-top: 57px;
   width: 100%;
@@ -14,13 +14,13 @@
   .reg-success {
     margin: 200px 0;
     text-align: center;
-    color: $shadowColor;
+    color: vars.$shadowColor;
     a {
       text-decoration: none;
-      color: $accentColor;
+      color: vars.$accentColor;
     }
   }
-  .reg-block {
+  .reg-container {
     .reg-title {
       font-size: 22px;
       color: #181d2d;
@@ -29,7 +29,7 @@
     .reg-subtitle {
       font-weight: 400;
       margin-bottom: 46px;
-      color: $shadowColor;
+      color: vars.$shadowColor;
     }
     .reg-form {
       display: flex;
@@ -38,6 +38,7 @@
 
       .input-str {
         display: flex;
+        align-items: center;
         border-bottom: 1px solid #c1c7d0;
         input {
           border: none;
@@ -58,22 +59,41 @@
           border-right: 1px solid #c1c7d0;
         }
         .user-icon {
-          background-image: url("../../assets/form/profile.png");
+          background-image: url("../../img/form/profile.png");
         }
         .mobile-icon {
-          background-image: url("../../assets/form/phone.png");
+          background-image: url("../../img/form/phone.png");
         }
         .email-icon {
-          background-image: url("../../assets/form/message.png");
+          background-image: url("../../img/form/message.png");
         }
         .password-icon {
-          background-image: url("../../assets/form/lock.png");
+          background-image: url("../../img/form/lock.png");
+        }
+        .password-show {
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+          height: 17px;
+          margin-right: 20px;
+        }
+
+        .show-false {
+          background-image: url("/img/icons/eye_visible.svg");
+          width: 22px;
+        }
+        .show-true {
+          background-image: url("/img/icons/eye_hidden.svg");
+          width: 21px;
         }
       }
       .reg-agree {
         font-size: 12px;
-        color: $accentColor;
+        color: vars.$accentColor;
         font-weight: 400;
+        & a {
+          color: vars.$accentColor;
+        }
       }
       input[type="submit"] {
         background-image: url("../img/icons/forward.png");
@@ -82,7 +102,7 @@
         width: 64px;
         height: 64px;
         border-radius: 50%;
-        background-color: $accentColor;
+        background-color: vars.$accentColor;
         cursor: pointer;
         margin-top: 39px;
         align-self: flex-end;
@@ -91,17 +111,17 @@
       }
     }
     .errorField {
-      color: $accentColor;
+      color: vars.$errorColor;;
       font-size: 12px;
     }
 
     .reg-link {
       padding-top: 92px;
-      color: $shadowColor;
+      color: vars.$shadowColor;
       font-weight: 400;
       a {
         text-decoration: none;
-        color: $accentColor;
+        color: vars.$accentColor;
         font-weight: 500;
       }
     }

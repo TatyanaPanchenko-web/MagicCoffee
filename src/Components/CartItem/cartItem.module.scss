@@ -1,12 +1,14 @@
-@import "../../style/vars.scss";
+@use "@/style/vars.scss";
 .cart-item {
   display: flex;
   gap: 11px;
   margin-bottom: 15px;
+  margin-right: -48px;
+  transition: transform 0.5s ease;
   .cart-wrapper {
-    background-color: $bgColor;
+    background-color: vars.$bgColor;
     border-radius: 15px;
-    width: 327px;
+    width: 100%;
     padding: 17px;
     display: flex;
     justify-content: space-between;
@@ -17,11 +19,16 @@
       }
     }
     .cart-info {
+      font-size: 12px;
+      color: rgba(0, 0, 0, 0.5);
       .cart-name {
-        font-size: 12px;
+        font-size: 14px;
+        color: vars.$mainTextColor;
       }
-      .cart-count {
-        color: rgba(0, 0, 0, 0.57);
+          .cart-count {
+        font-size: 14px;
+         font-size: 14px;
+        color: vars.$mainTextColor;
       }
     }
     .cart-price {
@@ -29,18 +36,43 @@
     }
   }
   .cart-delete {
-    background-color: #ffe5e5;
     width: 48px;
-    align-self: stretch;
+    background-color: #ffe5e5;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 15px;
+    border-radius: 12px;
     cursor: pointer;
-    .cart-delete-img {
-      background-image: url("../img/icons/delete.png");
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.6s ease, opacity 0.6s ease,
+      background-color 0.6s ease;
+
+    &-img {
       width: 24px;
       height: 24px;
+      background: url("../img/icons/delete.svg") center / contain no-repeat;
+    }
+
+    &:hover {
+      background-color: #ffcccc;
     }
   }
+}
+// .cart-item .deleteBtn {
+//   opacity: 0;
+//   visibility: hidden;
+//   transition: 0.2s;
+// }
+
+// .cart-item:hover .deleteBtn {
+//   opacity: 1;
+//   visibility: visible;
+// }
+.cart-item:hover {
+  transform: translateX(-48px);
+}
+.cart-item:hover .cart-delete {
+  opacity: 1;
+  visibility: visible;
 }

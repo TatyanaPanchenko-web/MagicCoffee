@@ -1,7 +1,7 @@
-@import "../../style/vars.scss";
+@use "@/style/vars.scss";
 .coffee-item {
   border-radius: 15px;
-  background-color: $bgColor;
+  background-color: vars.$bgColor;
   width: 154px;
   height: 164px;
   display: flex;
@@ -9,12 +9,18 @@
   justify-content: center;
   align-items: center;
   gap: 15px;
+  cursor: pointer;
+  transition: all 0.7s ease;
   .coffee-img {
+
     img {
       width: 100%;
     }
   }
   .coffee-name {
     font-family: "DM Sans", sans-serif;
+  }
+  &:hover {
+    transform: scale(1.03);
   }
 }

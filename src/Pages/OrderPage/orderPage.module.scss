@@ -1,4 +1,4 @@
-@import "../../style/vars.scss";
+@use "@/style/vars.scss";
 .order-inner {
   padding: 57px 26px 0;
   width: 375px;
@@ -22,14 +22,14 @@
     width: 325px;
     height: 146px;
     border-radius: 12px;
-    background-color: $bgColor;
+    background-color: vars.$bgColor;
     display: flex;
     justify-content: center;
     align-items: center;
   }
   .order-info {
     font-family: "DM Sans", serif;
-
+    margin-top: 20px;
     .order-info-item {
       display: flex;
       justify-content: space-between;
@@ -90,7 +90,7 @@
     margin-bottom: 10px;
   }
   .order-button {
-    background-color: $accentColor;
+    background-color: vars.$accentColor;
     color: #fff;
     border-radius: 30px;
     height: 46px;
@@ -100,4 +100,14 @@
     align-items: center;
     cursor: pointer;
   }
+}
+
+.active {
+  color: #000000 !important;
+}
+.active svg {
+  fill: #000000 !important;
+}
+svg.active {
+  fill: #000000 !important;
 }
