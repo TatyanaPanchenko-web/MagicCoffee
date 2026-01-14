@@ -2,7 +2,7 @@ header {
   display: flex;
   gap: 20px;
   justify-content: center;
-  padding-top: 63px;
+  padding-top: 20px;
   a {
     color: #333;
     text-decoration: none;
@@ -30,7 +30,7 @@ header {
         display: block;
         width: 26px;
         height: 26px;
-        background-image: url("../img/icons/profile.svg");
+        background-image: url("/img/icons/profile.svg");
         background-repeat: no-repeat;
       }
     }

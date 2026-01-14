@@ -1,10 +1,10 @@
 @use "@/style/vars.scss";
 .auth-inner {
-  padding: 57px 40px 0;
+  padding: 20px 40px 0;
   width: 100%;
   align-self: start;
    .auth-back {
-    background-image: url("../img/icons/back.png");
+    background-image: url("/img/icons/back.png");
     background-repeat: no-repeat;
     width: 24px;
     height: 24px;
@@ -42,7 +42,7 @@
         color: #c1c7d0;
       }
       .email-icon {
-        background-image: url("../../img/form/message.png");
+        background-image: url("/img/form/message.png");
         background-position: center;
         background-repeat: no-repeat;
         width: 36px;
@@ -51,7 +51,7 @@
         border-right: 1px solid #c1c7d0;
       }
       .password-icon {
-        background-image: url("../../img/form/lock.png");
+        background-image: url("/img/form/lock.png");
         background-position: center;
         background-repeat: no-repeat;
         width: 36px;
@@ -79,7 +79,7 @@
     }
 
     input[type="submit"] {
-      background-image: url("../img/icons/forward.png");
+      background-image: url("/img/icons/forward.png");
       background-repeat: no-repeat;
       background-position: center;
       width: 64px;
@@ -87,7 +87,7 @@
       border-radius: 50%;
       background-color: vars.$accentColor;
       cursor: pointer;
-      margin-top: 179px;
+      margin-top: 150px;
       align-self: flex-end;
       outline: none;
       border: none;
@@ -101,7 +101,7 @@
     text-align: right;
   }
   .auth-link {
-    padding-top: 129px;
+    padding-top: 100px;
     color: vars.$shadowColor;
     font-weight: 400;
     a {

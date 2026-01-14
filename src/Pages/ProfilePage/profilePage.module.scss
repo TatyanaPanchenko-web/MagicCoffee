@@ -1,12 +1,12 @@
 @use "@/style/vars.scss";
 .profile-inner {
-  padding: 57px 26px 0;
+  padding: 20px 26px 0;
 
   .profile-top {
     margin-bottom: 30px;
     display: flex;
     .profile-back {
-      background-image: url("./img/icons/back.png");
+      background-image: url("/img/icons/back.png");
       background-repeat: no-repeat;
       width: 24px;
       height: 24px;
@@ -44,13 +44,13 @@
           background-position: center;
         }
         .icon-name {
-          background-image: url("../../../img/icons/profile.svg");
+          background-image: url("/img/icons/profile.svg");
         }
         .icon-email {
-          background-image: url("../../../img/icons/message.svg");
+          background-image: url("/img/icons/message.svg");
         }
         .icon-phone {
-          background-image: url("../../../img/icons/phone.svg");
+          background-image: url("/img/icons/phone.svg");
         }
       }
       .profile-field {
@@ -79,7 +79,7 @@
         padding: 10px;
       }
       .profile-edit-icon {
-        background-image: url("../../../img/icons/edit.svg");
+        background-image: url("/img/icons/edit.svg");
         background-repeat: no-repeat;
         width: 24px;
         height: 24px;
@@ -88,7 +88,7 @@
         cursor: pointer;
       }
       .profile-save {
-        background-image: url("../../../img/icons/save.svg");
+        background-image: url("/img/icons/save.svg");
         background-repeat: no-repeat;
         background-position: center;
         width: 24px;

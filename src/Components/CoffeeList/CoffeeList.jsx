@@ -23,7 +23,7 @@ export default function CoffeeList() {
           >
             <div className={style["coffee-img"]}>
               <img
-                src={`./img/coffee/coffee_${item.name}.png`}
+                src={`/img/coffee/coffee_${item.name}.png`}
                 alt={item.name}
               />
             </div>

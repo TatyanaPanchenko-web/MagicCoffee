@@ -1,15 +1,15 @@
 @use "@/style/vars.scss";
 .order-inner {
-  padding: 57px 26px 0;
+  padding: 27px 26px 0;
   flex: 1 1 auto;
   .order-top {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin-bottom: 19px;
+    margin-bottom: 10px;
     gap: 115px;
     .order-back {
-      background-image: url("../img/icons/back.png");
+      background-image: url("/img/icons/back.png");
       background-repeat: no-repeat;
       width: 24px;
       height: 24px;
@@ -20,7 +20,7 @@
   }
   .order-img {
     width: 325px;
-    height: 146px;
+    height: 145px;
     border-radius: 12px;
     background-color: vars.$bgColor;
     display: flex;
@@ -29,11 +29,10 @@
   }
   .order-info {
     font-family: "DM Sans", serif;
-    margin-top: 20px;
     .order-info-item {
       display: flex;
       justify-content: space-between;
-      padding: 21px 0;
+      padding:15px 0;
       border-bottom: 1px solid #f4f5f7;
       .order-count {
         border: 1px solid rgba(216, 216, 216, 0.4);

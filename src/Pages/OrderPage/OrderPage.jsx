@@ -38,7 +38,7 @@ export default function OrderPage() {
         </div>
         <div className={style["order-img"]}>
           <img
-            src={`./img/coffee/coffee_${getCurrentItem.name}.png`}
+            src={`/img/coffee/coffee_${getCurrentItem.name}.png`}
             alt={getCurrentItem.name}
           />
         </div>

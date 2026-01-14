@@ -5,10 +5,10 @@
     background-color: vars.$accentColor;
     width: 100%;
     height: 323px;
-    background-image: url("../img/icons/logo.png");
+    background-image: url("/img/icons/logo.png");
     background-repeat: no-repeat;
     background-position: center;
-    margin: 98px 0 25px;
+    margin-bottom: 25px;
   }
   .welcomepage-title {
     font-size: 28px;
@@ -29,7 +29,7 @@
     margin-top: 136px;
     padding-right: 47px;
     .welcomepage-btn {
-      background-image: url("../img/icons/forward.png");
+      background-image: url("/img/icons/forward.png");
       background-repeat: no-repeat;
       background-position: center;
       width: 64px;
