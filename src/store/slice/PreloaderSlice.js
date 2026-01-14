@@ -7,11 +7,9 @@ const PreloaderSlice = createSlice({
   reducers: {
     activatePreloader(state) {
       state.preloader = true;
-      console.log(state.preloader);
     },
     deactivatePreloader(state) {
       state.preloader = false;
-      console.log(state.preloader);
     },
   },
 });

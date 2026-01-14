@@ -10,9 +10,8 @@ export default function WelcomePage() {
   useEffect(() => {
     const getUser = onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log(auth);
-        setUserAuth(true);
-        // const getUserFromBD: Promise<UserInfoType | null> = getData(
+             setUserAuth(true);
+        // const getUserFromBD: Promise<UserInfoType | null> = getDataFromBD(
         //   `users/${user.uid}`
         // );
         // getUserFromBD.then((result) => {
@@ -26,7 +25,7 @@ export default function WelcomePage() {
       getUser();
     };
   }, []);
-console.log(userAuth);
+
   return (
     <div className={style["welcomepage"]}>
       <div className={style["welcomepage-logo"]}></div>

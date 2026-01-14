@@ -10,8 +10,8 @@ import {
   deactivatePreloader,
 } from "@/store/slice/PreloaderSlice";
 import { setCoffee } from "@/store/slice/CoffeeSlice";
-// import { setUsers } from "@/store/slice/UsersSlice";
-import { getData } from "@/services/fireBase.js";
+
+import { getDataFromBD } from "@/services/fireBase.js";
 import style from "./menuPage.module.scss";
 
 export default function MenuPage() {
@@ -23,8 +23,8 @@ export default function MenuPage() {
 
   useEffect(() => {
     dispatch(activatePreloader());
-    const getCoffeeBase = getData("coffee");
-    const getUsers = getData("user");
+    const getCoffeeBase = getDataFromBD("coffee");
+    const getUsers = getDataFromBD("user");
 
     Promise.allSettled([getCoffeeBase, getUsers]).then((results) => {
       if (results[0].status === "fulfilled") {
@@ -40,24 +40,22 @@ export default function MenuPage() {
   return (
     <>
       <Preloader show={isLoading} />
-      <div className={style.container}>
-        <Header currentUsers={currentUsers} />
-        <main>
-          <div className={style["main-container"]}>
-            <div className={style["main-title"]}>Select your coffee</div>
-            <div className={style["main-carts"]}>
-              {getCoffeeStore.length === 0 ? (
-                <div className={style["main-error"]}>
-                  К сожалению, в данной категории ничего нет.
-                </div>
-              ) : (
-                <CoffeeList />
-              )}
+      <Header />
+
+      <main className={style["main-wrapper"]}>
+        <div className={style["main-title"]}>Select your coffee</div>
+        <div className={style["main-carts"]}>
+          {getCoffeeStore.length === 0 ? (
+            <div className={style["main-error"]}>
+              К сожалению, в данной категории ничего нет.
             </div>
-          </div>
-        </main>
-        <Footer />
-      </div>
+          ) : (
+            <CoffeeList />
+          )}
+        </div>
+      </main>
+
+      <Footer />
     </>
   );
 }

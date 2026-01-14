@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
+import InputMask from "react-input-mask";
 import { auth } from "@/services/fireBase";
 import { NavLink, Link } from "react-router-dom";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { setUser } from "@/services/fireBase";
+import { setUserDataBase } from "@/services/fireBase";
 
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -18,6 +19,7 @@ export default function RegPage() {
   const [show, setShow] = useState(false);
   const [errAuth, setErrAuth] = useState(false);
   const {
+    control,
     register,
     handleSubmit,
     reset,
@@ -42,7 +44,7 @@ export default function RegPage() {
         displayName: data.name,
       });
 
-      await setUser(data, user.uid);
+      await setUserDataBase(data, user.uid);
       setSuccessMessage(true);
       reset();
     } catch (error) {
@@ -99,17 +101,29 @@ export default function RegPage() {
                 <span
                   className={`${style["input-icon"]} ${style["mobile-icon"]}`}
                 ></span>
-                <input
-                  placeholder="Mobile Number"
+
+                <Controller
+                  control={control}
                   type="tel"
                   {...register("phone", {
                     required: "Must be filled in",
                     pattern: {
-                      value: /^[0-9]+$/,
+                      value:
+                        /^\+375\s?\((25|29|33|44)\)\s?\d{3}[-\s]?\d{2}[-\s]?\d{2}$/,
                       message: "Incorrect characters",
                     },
                   })}
+                  render={({ field }) => (
+                    <InputMask
+                      {...field}
+                      mask="+375 (99) 999-99-99"
+                      placeholder="+375 (29) 123-45-67"
+                    >
+                      {(inputProps) => <input type="tel" {...inputProps} />}
+                    </InputMask>
+                  )}
                 />
+             
                 {errors.phone && (
                   <p className={style.errorField}>{errors.phone?.message}</p>
                 )}

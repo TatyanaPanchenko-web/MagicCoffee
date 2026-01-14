@@ -1,7 +1,7 @@
 @use "@/style/vars.scss";
 .order-inner {
   padding: 57px 26px 0;
-  width: 375px;
+  flex: 1 1 auto;
   .order-top {
     display: flex;
     justify-content: flex-start;

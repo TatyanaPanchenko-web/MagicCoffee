@@ -1,21 +1,13 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { firebaseConfig } from "../firebaseConfig.js";
-import {
-  getDatabase,
-  ref,
-  onValue,
-  push,
-  update,
-  remove,
-  set,
-} from "firebase/database";
+import { getDatabase, ref, onValue, update, set } from "firebase/database";
 
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 export const auth = getAuth(app);
 
-export function getData(path) {
+export function getDataFromBD(path) {
   const dataRef = ref(database, "/" + path);
   return new Promise((resolve, reject) => {
     onValue(
@@ -29,13 +21,18 @@ export function getData(path) {
   });
 }
 
-export function setUser(data, uid) {
+export function setUserDataBase(data, uid) {
   const dataRef = ref(database, `/user/${uid}`);
   return set(dataRef, {
     name: data.name,
-    phone: data.phone,
     email: data.mail,
+    phone: data.phone,
   });
-  // const refKey = push(dataRef).key;
-  // push(dataRef, { ...data, key: refKey });
+}
+
+export function editUserDataBase(place, info, uid) {
+  const dataRef = ref(database, `/user/${uid}`);
+  return update(dataRef, {
+    [place]: info,
+  });
 }

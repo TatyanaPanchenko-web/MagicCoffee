@@ -17,7 +17,7 @@ import { EmailAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import Preloader from "@/Pages/Preloader/Preloader";
 import style from "./authPage.module.scss";
 
-export default function AuthPage({ setAuth }) {
+export default function AuthPage() {
   const [show, setShow] = useState(false);
   const [errAuth, setErrAuth] = useState(false);
   const isLoading = useSelector((state) => state.preloader.preloader);
@@ -30,7 +30,7 @@ export default function AuthPage({ setAuth }) {
   // const auth = getAuth();
   const navigate = useNavigate();
 
-    const onSubmit = async (data) => {
+  const onSubmit = async (data) => {
     dispatch(activatePreloader());
     setErrAuth(false);
     try {

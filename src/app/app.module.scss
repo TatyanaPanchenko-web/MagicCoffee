@@ -1,1 +1,7 @@
-
+.container {
+	display: flex;
+	flex-direction: column;
+  width: 375px;
+  height: 812px;
+  min-height: 100%;
+}

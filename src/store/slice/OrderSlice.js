@@ -1,12 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { auth } from "@/services/fireBase";
 
 const OrderSlice = createSlice({
   name: "order",
-  initialState: { order: [] },
+  initialState: [],
 
   reducers: {
     addOrder(state, action) {
-      state.order.push(action.payload);
+      const orderWithDate = {
+        ...action.payload,
+        date: new Date().toLocaleString("ru-RU"),
+        uid: auth.currentUser.uid,
+      };
+      state.push(orderWithDate);
     },
   },
 });

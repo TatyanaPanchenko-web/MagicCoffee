@@ -1,31 +1,36 @@
 @use "@/style/vars.scss";
 .footer {
-  background-color: vars.$accentColor;
   padding: 16px 25px 22px;
-  width: 375px;
-}
-.footer-inner {
-  border-radius: 20px;
-  background-color: #fff;
-  padding: 21px 0;
-  .footer-icons {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    .footer-icon {
-      width: 21px;
-      height: 21px;
-      background-size: fill;
-      background-position: center;
-    }
-    .icon-home {
-      background-image: url("../img/footer/home.svg");
-    }
-    .icon-gift {
-      background-image: url("../img/footer/gift.png");
-    }
-    .icon-cart {
-      background-image: url("../img/footer/cart.svg");
+  width: 100%;
+  .footer-inner {
+    border-radius: 20px;
+    background-color: #fff;
+    padding: 21px 0;
+    box-shadow: 0 4px 50px rgba(50, 74, 89, 0.12);
+    .footer-icons {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      .footer-icon {
+        width: 21px;
+        height: 21px;
+        background-size: fill;
+        background-position: center;
+      }
+      .icon-home {
+        background-image: url("../img/footer/home.svg");
+      }
+      .icon-gift {
+        background-image: url("../img/footer/gift.png");
+      }
+      .icon-cart {
+        background-image: url("../img/footer/cart.svg");
+      }
     }
   }
+}
+.footer.footer-light {
+}
+.footer.footer-dark {
+  background-color: vars.$accentColor;
 }

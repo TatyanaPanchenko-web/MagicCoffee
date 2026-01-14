@@ -1,11 +1,10 @@
 .startpage {
+  height: 100%;
   background-image: url("../img/start/bg.png");
   background-repeat: no-repeat;
   display: flex;
   justify-content: center;
   padding-top: 137px;
-  width: 375px;
-  height: 812px;
   position: absolute;
   .startpage-logo {
     background-image: url("../img/icons/logo.png");

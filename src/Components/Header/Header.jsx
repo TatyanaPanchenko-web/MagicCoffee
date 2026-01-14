@@ -1,20 +1,11 @@
-import { useEffect, useState } from "react";
 import { auth } from "@/services/fireBase";
 import { NavLink } from "react-router-dom";
 import style from "./header.module.scss";
 
-export default function Header({ currentUsers }) {
-  // const [name, setName] = useState([]);
-  //console.log(currentUsers);
-  const name = auth.currentUser?.displayName;
-  // //console.log(Object?.keys(currentUsers));
-  // useEffect(() => {
-  //   if (typeof currentUsers !== "undefined") {
-  //     setName(Object?.values(currentUsers));
-  //   }
-  // }, []);
+export default function Header() {
 
-  //console.log(name);
+  const name = auth.currentUser?.displayName;
+
   return (
     <header>
       <div className={style["header-container"]}>

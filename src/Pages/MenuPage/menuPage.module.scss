@@ -1,31 +1,22 @@
 @use "@/style/vars.scss";
-.container {
-  width: 375px;
-  .main-container {
-    background-color: vars.$accentColor;
-    border-radius: 25px 25px 0 0;
-    padding: 0 25px 10px;
-    .main-title {
+
+.main-wrapper {
+  background-color: vars.$accentColor;
+  border-radius: 25px 25px 0 0;
+  padding: 0 25px 10px;
+  flex: 1 1 auto;
+  .main-title {
+    color: #fff;
+    padding: 16px 0 24px;
+    font-size: 16px;
+  }
+  .main-carts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+
+    .main-error {
       color: #fff;
-      padding: 16px 0 24px;
-      font-size: 16px;
-    }
-    .main-carts {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      .coffee-item {
-        border-radius: 15px;
-        background-color: vars.$bgColor;
-        width: 154px;
-        height: 164px;
-        .coffee-name {
-          color: #001833;
-        }
-      }
-      .main-error {
-        color: #fff;
-      }
     }
   }
 }
