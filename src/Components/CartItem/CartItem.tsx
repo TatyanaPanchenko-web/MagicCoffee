@@ -1,9 +1,14 @@
 import style from "./cartItem.module.scss";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "@/store/index";
 import { deleteItemCart } from "@/store/slice/CartSlice";
+import { CartType } from "@/types";
 
-export default function CartItem({ item }) {
-  const dispatch = useDispatch();
+type CartItemPropsType = {
+  item:CartType
+}
+export default function CartItem({ item }:CartItemPropsType) {
+ 
+  const dispatch = useAppDispatch();
   return (
     <div className={style["cart-item"]}>
       <div className={style["cart-wrapper"]}>

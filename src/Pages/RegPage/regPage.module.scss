@@ -1,6 +1,6 @@
 @use "@/style/vars.scss";
 .reg-inner {
-  padding: 20px 40px 0;
+  padding: 27px 26px 0;
   width: 100%;
   align-self: start;
   .reg-back {
@@ -117,7 +117,9 @@
       font-size: 12px;
       padding-left: 20px;
       padding-right: 5px;
-      text-align: right;
+            &-right {
+        text-align: right;
+      }
     }
 
     .reg-link {

@@ -1,7 +1,10 @@
 import { NavLink } from "react-router-dom";
 import style from "./footer.module.scss";
 
-export default function Footer({ bg }) {
+type FooterProps = {
+  bg?: "light" | "dark";
+};
+export default function Footer({ bg }:FooterProps) {
   return (
     <footer
       className={`${style["footer"]} ${

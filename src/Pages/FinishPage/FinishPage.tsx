@@ -3,7 +3,7 @@ import style from "./finishPage.module.scss";
 
 export default function FinishPage() {
   return (
-    <div className={style["finish-wrapper"]}>
+    <div className={style["finish-inner"]}>
       <div className={style["finish-top"]}>
         <NavLink to="/menu">
           <div className={style["finish-back"]}></div>

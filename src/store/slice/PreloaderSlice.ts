@@ -1,15 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialState: boolean = false;
 const PreloaderSlice = createSlice({
   name: "preloader",
-  initialState: { preloader: false },
+  initialState,
 
   reducers: {
-    activatePreloader(state) {
-      state.preloader = true;
+    activatePreloader(_state) {
+      return true;
     },
-    deactivatePreloader(state) {
-      state.preloader = false;
+    deactivatePreloader(_state) {
+      return false;
     },
   },
 });

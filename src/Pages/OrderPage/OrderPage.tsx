@@ -1,31 +1,72 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useAppSelector, useAppDispatch } from "@/store/index";
 import { addItemCart } from "@/store/slice/CartSlice";
 import Footer from "@/Components/Footer/Footer";
 import IconsSvg from "./IconsSvg";
 import style from "./orderPage.module.scss";
+import { CartType } from "@/types";
+
+type ActiveItemKeyType = "ristretto" | "where" | "volume";
+
 
 export default function OrderPage() {
-  const getCurrentItem = useSelector((state) => state.currentItem.currentItem);
+  const getCurrentItem = useAppSelector((state) => state.currentItem);
+  if (!getCurrentItem) return null;
   const [activeItem, setActiveItem] = useState({
     ristretto: 0,
     where: 0,
     volume: 0,
   });
-  const [orderInfo, setOrderInfo] = useState({
+
+  const [orderInfo, setOrderInfo] = useState<CartType>({
     count: getCurrentItem.count,
     id: getCurrentItem.id,
     name: getCurrentItem.name,
-    ristretto: getCurrentItem.ristretto[activeItem.ristretto],
-    where: getCurrentItem.where[activeItem.where],
-    volume: getCurrentItem.volume[activeItem.volume],
-    price: getCurrentItem.price[activeItem.volume],
+    ristretto: getCurrentItem.ristretto[activeItem.ristretto] ?? "",
+    where: getCurrentItem.where[activeItem.where] ?? "",
+    volume: getCurrentItem.volume[activeItem.volume] ?? 0,
+    price: getCurrentItem.price[activeItem.volume] ?? 0,
   });
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+  const getCountItem = (flag: boolean) => {
+    if (flag) {
+      setOrderInfo((prev) => ({ ...prev, count: prev.count + 1 }));
+    } else {
+      if (orderInfo.count > 1) {
+        setOrderInfo((prev) => ({
+          ...prev,
+          count: prev.count - 1,
+        }));
+      }
+    }
+  };
+  const checkElement = (target: ActiveItemKeyType, index: number) => {
+    setActiveItem((prev) => ({
+      ...prev,
+      [target]: index,
+    }));
+
+    setOrderInfo((prev) => {
+      let price = prev.price;
+      if (target === "ristretto" && activeItem.ristretto === index) {
+        return prev;
+      }
+      if (target === "ristretto") {
+        price = index === 1 ? prev.price + 1 : prev.price - 1;
+      }
+      if (target === "volume") {
+        price = getCurrentItem.price[index] ?? prev.price;
+      }
+      return {
+        ...prev,
+        [target]: getCurrentItem[target][index],
+        price,
+      };
+    });
+  };
 
   return (
     <>
@@ -48,12 +89,7 @@ export default function OrderPage() {
             <div className={style["order-count"]}>
               <span
                 onClick={() => {
-                  if (orderInfo.count > 1) {
-                    setOrderInfo((prev) => ({
-                      ...prev,
-                      count: prev.count - 1,
-                    }));
-                  }
+                  getCountItem(false);
                 }}
               >
                 -
@@ -61,7 +97,7 @@ export default function OrderPage() {
               {orderInfo.count}
               <span
                 onClick={() => {
-                  setOrderInfo((prev) => ({ ...prev, count: prev.count + 1 }));
+                  getCountItem(true);
                 }}
               >
                 +
@@ -77,19 +113,7 @@ export default function OrderPage() {
                 return (
                   <div
                     onClick={() => {
-                      if (activeItem.ristretto === index) return;
-                      setActiveItem((prev) => ({
-                        ...prev,
-                        ristretto: index,
-                      }));
-
-                      if (activeItem.ristretto === index) return;
-
-                      setOrderInfo((prev) => ({
-                        ...prev,
-                        ristretto: getCurrentItem.ristretto[index],
-                        price: index === 1 ? prev.price + 1 : prev.price - 1,
-                      }));
+                      checkElement("ristretto", index);
                     }}
                     className={`${
                       activeItem.ristretto === index ? style.active : ""
@@ -113,14 +137,7 @@ export default function OrderPage() {
                 return (
                   <div
                     onClick={() => {
-                      setActiveItem({
-                        ...activeItem,
-                        where: index,
-                      });
-                      setOrderInfo({
-                        ...orderInfo,
-                        where: getCurrentItem.where[index],
-                      });
+                      checkElement("where", index);
                     }}
                     className={`${
                       activeItem.where === index ? style.active : ""
@@ -128,7 +145,6 @@ export default function OrderPage() {
                     key={index}
                   >
                     <IconsSvg id={`${item}`} />
-                    <span style={{ display: "none" }}>{item}</span>
                   </div>
                 );
               })}
@@ -145,15 +161,7 @@ export default function OrderPage() {
                 return (
                   <div
                     onClick={() => {
-                      setActiveItem({
-                        ...activeItem,
-                        volume: index,
-                      });
-                      setOrderInfo({
-                        ...orderInfo,
-                        volume: getCurrentItem.volume[index],
-                        price: getCurrentItem.price[index],
-                      });
+                      checkElement("volume", index);
                     }}
                     className={`${
                       activeItem.volume === index ? style.active : ""

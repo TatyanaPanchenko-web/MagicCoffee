@@ -1,4 +1,7 @@
-export default function IconsSvg({ id }) {
+type IconSvgType = {
+  id: string;
+};
+export default function IconsSvg({ id }:IconSvgType) {
   switch (id) {
     case "Onsite":
       return (

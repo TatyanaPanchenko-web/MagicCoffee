@@ -5,15 +5,22 @@ import { auth } from "@/services/fireBase";
 import { NavLink, Link } from "react-router-dom";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { setUserDataBase } from "@/services/fireBase";
-
-import { useSelector, useDispatch } from "react-redux";
+import { useAppSelector, useAppDispatch } from "@/store/index";
 import {
   activatePreloader,
   deactivatePreloader,
 } from "@/store/slice/PreloaderSlice";
 import Preloader from "@/Pages/Preloader/Preloader";
 import style from "./regPage.module.scss";
+import { setUser } from "@/store/slice/UserSlice";
+import { UserType } from "@/types";
 
+type FormValuesType = {
+  email: string;
+  password: string;
+  name: string;
+  phone: string;
+};
 export default function RegPage() {
   const [successMessage, setSuccessMessage] = useState(false);
   const [show, setShow] = useState(false);
@@ -24,18 +31,18 @@ export default function RegPage() {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm();
+  } = useForm<FormValuesType>();
 
-  const isLoading = useSelector((state) => state.preloader.preloader);
-  const dispatch = useDispatch();
-  const onSubmit = async (data) => {
+  const isLoading = useAppSelector((state) => state.preloader);
+  const dispatch = useAppDispatch();
+  const onSubmit = async (data: UserType) => {
     dispatch(activatePreloader());
     setErrAuth(false);
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
-        data.mail,
-        data.password
+        data.email,
+        data.password,
       );
 
       const user = userCredential.user;
@@ -46,10 +53,15 @@ export default function RegPage() {
 
       await setUserDataBase(data, user.uid);
       setSuccessMessage(true);
+      setUser([data]);
       reset();
     } catch (error) {
-      console.error(error);
-      setErrAuth(true);
+      if (error instanceof Error) {
+        console.error(error.message);
+        setErrAuth(true);
+      } else {
+        console.error("Unknown error", error);
+      }
     } finally {
       dispatch(deactivatePreloader());
     }
@@ -85,7 +97,7 @@ export default function RegPage() {
                 <input
                   placeholder="Name"
                   {...register("name", {
-                    required: "Must be filled in",
+                    required: "This field is required",
                     maxLength: 30,
                     pattern: {
                       value: /^[A-Za-z]+$/i,
@@ -94,7 +106,11 @@ export default function RegPage() {
                   })}
                 />
                 {errors.name && (
-                  <p className={style.errorField}>{errors.name?.message}</p>
+                  <p
+                    className={`${style["errorField"]} ${style["errorField-right"]}`}
+                  >
+                    {errors.name?.message}
+                  </p>
                 )}
               </div>
               <div className={style["input-str"]}>
@@ -104,9 +120,8 @@ export default function RegPage() {
 
                 <Controller
                   control={control}
-                  type="tel"
                   {...register("phone", {
-                    required: "Must be filled in",
+                    required: "This field is required",
                     pattern: {
                       value:
                         /^\+375\s?\((25|29|33|44)\)\s?\d{3}[-\s]?\d{2}[-\s]?\d{2}$/,
@@ -123,9 +138,13 @@ export default function RegPage() {
                     </InputMask>
                   )}
                 />
-             
+
                 {errors.phone && (
-                  <p className={style.errorField}>{errors.phone?.message}</p>
+                  <p
+                    className={`${style["errorField"]} ${style["errorField-right"]}`}
+                  >
+                    {errors.phone?.message}
+                  </p>
                 )}
               </div>
               <div className={style["input-str"]}>
@@ -135,16 +154,20 @@ export default function RegPage() {
                 <input
                   placeholder="Email address"
                   type="email"
-                  {...register("mail", {
-                    required: "Must be filled in",
+                  {...register("email", {
+                    required: "This field is required",
                     pattern: {
                       value: /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/,
                       message: "Incorrect characters",
                     },
                   })}
                 />
-                {errors.mail && (
-                  <p className={style.errorField}>{errors.mail?.message}</p>
+                {errors.email && (
+                  <p
+                    className={`${style["errorField"]} ${style["errorField-right"]}`}
+                  >
+                    {errors.email?.message}
+                  </p>
                 )}
               </div>
               <div className={style["input-str"]}>
@@ -155,7 +178,7 @@ export default function RegPage() {
                   placeholder="Password"
                   type={show ? "text" : "password"}
                   {...register("password", {
-                    required: "Must be filled in",
+                    required: "This field is required",
                     minLength: {
                       value: 6,
                       message: "At least 6 characters",
@@ -174,7 +197,11 @@ export default function RegPage() {
                   }
                 ></div>
                 {errors.password && (
-                  <p className={style.errorField}>{errors.password?.message}</p>
+                  <p
+                    className={`${style["errorField"]} ${style["errorField-right"]}`}
+                  >
+                    {errors.password?.message}
+                  </p>
                 )}
               </div>
               {errAuth && (

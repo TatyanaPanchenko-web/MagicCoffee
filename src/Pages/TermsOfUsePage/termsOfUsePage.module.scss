@@ -1,9 +1,9 @@
 @use "@/style/vars.scss";
 .terms-inner {
-  padding-top: 20px;
+  padding: 27px 26px 0;
   width: 100%;
   align-self: start;
-   .terms-back {
+  .terms-back {
     background-image: url("/img/icons/back.png");
     background-repeat: no-repeat;
     width: 24px;

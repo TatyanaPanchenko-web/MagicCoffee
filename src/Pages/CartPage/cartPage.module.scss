@@ -1,6 +1,6 @@
 @use "@/style/vars.scss";
 .cart-inner {
-  padding: 20px 26px 0;
+  padding: 27px 26px 0;
   flex: 1 1 auto;
   .cart-top {
     margin-bottom: 24px;
@@ -36,12 +36,22 @@
   .cart-button {
     background-color: vars.$accentColor;
     color: #fff;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
     border-radius: 30px;
     height: 46px;
     width: 165px;
     display: flex;
     justify-content: center;
     align-items: center;
+    border: none;
+    outline: none;
     cursor: pointer;
+    &:disabled {
+      background-color: #ddd;
+      border: none;
+      cursor: not-allowed;
+    }
   }
 }

@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useAppSelector,useAppDispatch } from "@/store/index";
 import { addOrder } from "@/store/slice/OrderSlice";
 import { deleteAllCart } from "@/store/slice/CartSlice";
 import { totalPrice } from "@/common/cartFunction";
@@ -9,9 +9,10 @@ import Footer from "@/Components/Footer/Footer";
 import style from "./cartPage.module.scss";
 
 export default function OrderPage() {
-  const getCartItems = useSelector((state) => state.cart.cart);
-  const dispatch = useDispatch();
+  const getCartItems = useAppSelector((state) => state.cart);
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  
   return (
     <>
       <div className={style["cart-inner"]}>
@@ -22,7 +23,7 @@ export default function OrderPage() {
           <div className={style["cart-title"]}>My order</div>
         </div>
         <div className={style["cart-wrapper"]}>
-          {getCartItems.map((item, index) => {
+          {getCartItems.map((item, index: number) => {
             return <CartItem key={index} item={item} />;
           })}
         </div>
@@ -33,8 +34,10 @@ export default function OrderPage() {
               {totalPrice(getCartItems)} BYN
             </div>
           </div>
-          <div
+          <button
+            disabled={getCartItems.length === 0 ? true : false}
             onClick={() => {
+              if (getCartItems.length === 0) return;
               dispatch(addOrder(getCartItems));
               dispatch(deleteAllCart());
               navigate("/finish");
@@ -42,7 +45,7 @@ export default function OrderPage() {
             className={style["cart-button"]}
           >
             Order now
-          </div>
+          </button>
         </div>
       </div>
       <Footer />

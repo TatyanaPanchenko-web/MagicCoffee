@@ -2,7 +2,8 @@ import { auth } from "@/services/fireBase";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, NavLink } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "@/store/index";
 // import { getCurrentUser } from "@/services/fireBase";
 import {
   activatePreloader,
@@ -17,30 +18,40 @@ import { EmailAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import Preloader from "@/Pages/Preloader/Preloader";
 import style from "./authPage.module.scss";
 
+type FormValuesType = {
+  email: string;
+  password: string;
+};
+
 export default function AuthPage() {
   const [show, setShow] = useState(false);
   const [errAuth, setErrAuth] = useState(false);
-  const isLoading = useSelector((state) => state.preloader.preloader);
-  const dispatch = useDispatch();
+  const isLoading = useAppSelector((state) => state.preloader);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<FormValuesType>();
   // const auth = getAuth();
-  const navigate = useNavigate();
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data:FormValuesType) => {
+  
     dispatch(activatePreloader());
     setErrAuth(false);
     try {
-      await signInWithEmailAndPassword(auth, data.mail, data.password);
+      await signInWithEmailAndPassword(auth, data.email, data.password);
 
       // setAuth(true);
       navigate("/menu");
     } catch (error) {
-      console.error(error.message);
-      setErrAuth(true);
+      if (error instanceof Error) {
+        console.error(error.message);
+        setErrAuth(true);
+      } else {
+        console.error("Unknown error", error);
+      }
     } finally {
       dispatch(deactivatePreloader());
     }
@@ -60,7 +71,7 @@ export default function AuthPage() {
             <span className={style["email-icon"]}></span>
             <input
               placeholder="Email address"
-              {...register("mail", {
+              {...register("email", {
                 required: "Must be filled in",
                 pattern: {
                   value: /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/,
@@ -68,8 +79,8 @@ export default function AuthPage() {
                 },
               })}
             />
-            {errors.mail && (
-              <p className={style.errorField}>{errors.mail?.message}</p>
+            {errors.email && (
+              <p className={style.errorField}>{errors.email?.message}</p>
             )}
           </div>
           <div className={style["input-str"]}>

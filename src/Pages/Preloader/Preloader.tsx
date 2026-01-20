@@ -1,6 +1,9 @@
 import style from "./preloader.module.scss";
 
-export default function Preloader({ show }) {
+type PreloaderPropsType = {
+  show: boolean;
+};
+export default function Preloader({ show }: PreloaderPropsType) {
   if (!show) return null;
   return (
     <div className={style["startpage"]}>

@@ -1,17 +1,18 @@
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+
+import {  useAppSelector, useAppDispatch } from "@/store/index";
 import { useNavigate } from "react-router-dom";
-
 import { setCurrentItem } from "@/store/slice/CurrentItemSlice";
-import style from "./coffeeList.module.scss";
+import style from "./coffeeItem.module.scss";
 
-export default function CoffeeList() {
+export default function CoffeeItem() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const getCoffeeStore = useSelector((state) => state.coffee);
+  const dispatch = useAppDispatch();
+  const getCoffeeStore = useAppSelector((state) => state.coffeeList);
+
   return (
     <>
       {getCoffeeStore.map((item, index) => {
+      
         return (
           <div
             className={style["coffee-item"]}

@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import WelcomePage from "@/Pages/WelcomePage/WelcomePage";
-import MenuPage from "@/Pages/MenuPage/MenuPage";
+import CoffeeListPage from "@/Pages/CoffeeListPage/CoffeeListPage";
 import AuthPage from "@/Pages/AuthPage/AuthPage";
 import RegPage from "@/Pages/RegPage/RegPage";
 import TermsOfUsePage from "@/Pages/TermsOfUsePage/TermsOfUsePage";
@@ -15,7 +15,7 @@ export default function App() {
     <div className={style.container}>
       <Routes>
         <Route path="/" element={<WelcomePage />}></Route>
-        <Route path="/menu" element={<MenuPage />}></Route>
+        <Route path="/menu" element={<CoffeeListPage />}></Route>
         <Route path="/auth" element={<AuthPage />}></Route>
         <Route path="/reg" element={<RegPage />}></Route>
         <Route path="/terms" element={<TermsOfUsePage />}></Route>
