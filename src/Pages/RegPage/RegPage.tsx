@@ -157,7 +157,7 @@ export default function RegPage() {
                   {...register("email", {
                     required: "This field is required",
                     pattern: {
-                      value: /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/,
+                      value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,}$/,
                       message: "Incorrect characters",
                     },
                   })}

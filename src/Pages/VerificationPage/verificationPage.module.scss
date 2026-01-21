@@ -1,0 +1,123 @@
+@use "@/style/vars.scss";
+.verification-inner {
+  padding: 27px 26px 0;
+  flex: 1 1 auto;
+  .success-message {
+    text-align: center;
+    padding: 0 20px;
+    padding-top: 100px;
+    span {
+      color: vars.$accentColor;
+      text-decoration: underline;
+    }
+  }
+  .verification-top {
+    margin-bottom: 30px;
+    .verification-back {
+      background-image: url("/img/icons/back.png");
+      background-repeat: no-repeat;
+      width: 24px;
+      height: 24px;
+      margin-bottom: 24px;
+    }
+    .verification-title {
+      font-size: 20px;
+      color: #001833;
+      margin-bottom: 24px;
+    }
+    .verification-subtitle {
+      font-weight: 400;
+      margin-bottom: 46px;
+      color: vars.$shadowColor;
+    }
+  }
+  .verification-wrapper {
+    position: relative;
+    margin-bottom: 70px;
+    .input-str {
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #c1c7d0;
+      margin-bottom: 36px;
+
+      input {
+        border: none;
+        outline: none;
+        padding-left: 19px;
+        flex: 1 1 auto;
+        min-width: 0;
+      }
+      input::placeholder {
+        font-family: "Poppins", sans-serif;
+        font-size: 12px;
+        color: #c1c7d0;
+      }
+
+      .password-icon {
+        background-image: url("/img/form/lock.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        width: 36px;
+        height: 36px;
+        display: block;
+        flex-shrink: 0;
+        border-right: 1px solid #c1c7d0;
+      }
+      .email-icon {
+        background-image: url("/img/form/message.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        width: 36px;
+        height: 36px;
+        flex-shrink: 0;
+        border-right: 1px solid #c1c7d0;
+      }
+      .password-show {
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 17px;
+        margin-right: 20px;
+      }
+
+      .show-false {
+        background-image: url("/img/icons/eye_visible.svg");
+        width: 22px;
+      }
+      .show-true {
+        background-image: url("/img/icons/eye_hidden.svg");
+        width: 21px;
+      }
+    }
+    .input-str:last-of-type {
+      margin-bottom: 90px;
+    }
+    input[type="submit"] {
+      background-color: vars.$accentColor;
+      color: #fff;
+      border-radius: 30px;
+      height: 46px;
+      width: 165px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: none;
+      outline: none;
+      font-family: "Poppins", sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      margin: 0 auto;
+      margin-top: 50px;
+      cursor: pointer;
+    }
+    .errorField {
+      color: vars.$errorColor;
+      font-size: 12px;
+      padding-left: 40px;
+      padding-right: 5px;
+      &-right {
+        text-align: right;
+      }
+    }
+  }
+}

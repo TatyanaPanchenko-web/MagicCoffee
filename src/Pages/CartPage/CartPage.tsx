@@ -1,6 +1,5 @@
-import { useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useAppSelector,useAppDispatch } from "@/store/index";
+import { useAppSelector, useAppDispatch } from "@/store/index";
 import { addOrder } from "@/store/slice/OrderSlice";
 import { deleteAllCart } from "@/store/slice/CartSlice";
 import { totalPrice } from "@/common/cartFunction";
@@ -12,7 +11,7 @@ export default function OrderPage() {
   const getCartItems = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  
+
   return (
     <>
       <div className={style["cart-inner"]}>

@@ -2,19 +2,12 @@ import { auth } from "@/services/fireBase";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { useAppDispatch, useAppSelector } from "@/store/index";
-// import { getCurrentUser } from "@/services/fireBase";
 import {
   activatePreloader,
   deactivatePreloader,
 } from "@/store/slice/PreloaderSlice";
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-} from "firebase/auth";
-import { EmailAuthProvider, GoogleAuthProvider } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import Preloader from "@/Pages/Preloader/Preloader";
 import style from "./authPage.module.scss";
 
@@ -34,16 +27,12 @@ export default function AuthPage() {
     handleSubmit,
     formState: { errors },
   } = useForm<FormValuesType>();
-  // const auth = getAuth();
 
-  const onSubmit = async (data:FormValuesType) => {
-  
+  const onSubmit = async (data: FormValuesType) => {
     dispatch(activatePreloader());
     setErrAuth(false);
     try {
       await signInWithEmailAndPassword(auth, data.email, data.password);
-
-      // setAuth(true);
       navigate("/menu");
     } catch (error) {
       if (error instanceof Error) {
@@ -74,13 +63,17 @@ export default function AuthPage() {
               {...register("email", {
                 required: "Must be filled in",
                 pattern: {
-                  value: /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/,
+                  value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,}$/,
                   message: "Incorrect characters",
                 },
               })}
             />
             {errors.email && (
-              <p className={style.errorField}>{errors.email?.message}</p>
+              <p
+                className={`${style["errorField"]} ${style["errorField-right"]}`}
+              >
+                {errors.email?.message}
+              </p>
             )}
           </div>
           <div className={style["input-str"]}>
@@ -108,7 +101,11 @@ export default function AuthPage() {
               }
             ></div>
             {errors.password && (
-              <p className={style.errorField}>{errors.password?.message}</p>
+              <p
+                className={`${style["errorField"]} ${style["errorField-right"]}`}
+              >
+                {errors.password?.message}
+              </p>
             )}
           </div>
           {errAuth && (

@@ -21,7 +21,7 @@
   }
   .reg-container {
     .reg-title {
-      font-size: 22px;
+      font-size: 20px;
       color: #181d2d;
       margin-bottom: 24px;
     }
@@ -115,9 +115,9 @@
     .errorField {
       color: vars.$errorColor;
       font-size: 12px;
-      padding-left: 20px;
+      padding-left: 40px;
       padding-right: 5px;
-            &-right {
+      &-right {
         text-align: right;
       }
     }
