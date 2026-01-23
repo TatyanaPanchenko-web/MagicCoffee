@@ -52,9 +52,17 @@
         font-size: 12px;
         color: #c1c7d0;
       }
-
+      .email-icon {
+        background-image: url("/img/icons/message.svg");
+        background-position: center;
+        background-repeat: no-repeat;
+        width: 36px;
+        height: 36px;
+        flex-shrink: 0;
+        border-right: 1px solid #c1c7d0;
+      }
       .password-icon {
-        background-image: url("/img/form/lock.png");
+        background-image: url("/img/icons/lock.svg");
         background-position: center;
         background-repeat: no-repeat;
         width: 36px;
@@ -63,15 +71,7 @@
         flex-shrink: 0;
         border-right: 1px solid #c1c7d0;
       }
-      .email-icon {
-        background-image: url("/img/form/message.png");
-        background-position: center;
-        background-repeat: no-repeat;
-        width: 36px;
-        height: 36px;
-        flex-shrink: 0;
-        border-right: 1px solid #c1c7d0;
-      }
+
       .password-show {
         background-position: center;
         background-repeat: no-repeat;

@@ -53,6 +53,43 @@
       "where": ["Onsite", "Takeaway"],
       "volume": [250, 350, 450],
       "price": [3, 4, 5]
+    },
+
+    {
+      "name": "Mocha",
+      "id": "a1b2",
+      "count": 1,
+      "ristretto": ["One", "Two"],
+      "where": ["Onsite", "Takeaway"],
+      "volume": [350, 450],
+      "price": [6, 7]
+    },
+    {
+      "name": "Macchiato",
+      "id": "c3d4",
+      "count": 1,
+      "ristretto": ["One", "Two"],
+      "where": ["Onsite", "Takeaway"],
+      "volume": [250, 350],
+      "price": [4, 5]
+    },
+    {
+      "name": "Cortado",
+      "id": "e5f6",
+      "count": 1,
+      "ristretto": ["One", "Two"],
+      "where": ["Onsite", "Takeaway"],
+      "volume": [250],
+      "price": [4]
+    },
+    {
+      "name": "Irish Coffee",
+      "id": "g7h8",
+      "count": 1,
+      "ristretto": ["One", "Two"],
+      "where": ["Onsite"],
+      "volume": [350],
+      "price": [8]
     }
   ]
 }

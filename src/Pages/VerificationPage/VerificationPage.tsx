@@ -25,7 +25,7 @@ type successMessageType = {
   newEmail: string | null;
 };
 export default function VerificationPage() {
-  const [show, setShow] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [errAuth, setErrAuth] = useState(false);
   const [successMessage, setSuccessMessage] = useState<successMessageType>({
     status: false,
@@ -129,7 +129,7 @@ export default function VerificationPage() {
                   <div className={style["password-icon"]}></div>
                   <input
                     placeholder="Password"
-                    type={show ? "text" : "password"}
+                    type={showPassword ? "text" : "password"}
                     {...register("password", {
                       required: "Must be filled in",
                       minLength: {
@@ -140,12 +140,12 @@ export default function VerificationPage() {
                   />
                   <div
                     onClick={() => {
-                      setShow((prev) => !prev);
+                      setShowPassword((prev) => !prev);
                     }}
                     className={
-                      show
-                        ? `${style["password-show"]} ${style["show-true"]}`
-                        : `${style["password-show"]} ${style["show-false"]}
+                      showPassword
+                        ? `${style["password-showPassword"]} ${style["showPassword-true"]}`
+                        : `${style["password-showPassword"]} ${style["showPassword-false"]}
             `
                     }
                   ></div>

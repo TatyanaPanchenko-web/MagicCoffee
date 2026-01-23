@@ -11,19 +11,12 @@ import {
   deactivatePreloader,
 } from "@/store/slice/PreloaderSlice";
 import Preloader from "@/Pages/Preloader/Preloader";
-import style from "./regPage.module.scss";
-import { setUser } from "@/store/slice/UserSlice";
 import { UserType } from "@/types";
+import style from "./regPage.module.scss";
 
-type FormValuesType = {
-  email: string;
-  password: string;
-  name: string;
-  phone: string;
-};
 export default function RegPage() {
   const [successMessage, setSuccessMessage] = useState(false);
-  const [show, setShow] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [errAuth, setErrAuth] = useState(false);
   const {
     control,
@@ -31,7 +24,7 @@ export default function RegPage() {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<FormValuesType>();
+  } = useForm<UserType>();
 
   const isLoading = useAppSelector((state) => state.preloader);
   const dispatch = useAppDispatch();
@@ -53,8 +46,7 @@ export default function RegPage() {
 
       await setUserDataBase(data, user.uid);
       setSuccessMessage(true);
-      setUser([data]);
-      reset();
+          reset();
     } catch (error) {
       if (error instanceof Error) {
         console.error(error.message);
@@ -91,9 +83,11 @@ export default function RegPage() {
               className={style["reg-form"]}
             >
               <div className={style["input-str"]}>
-                <span
-                  className={`${style["input-icon"]} ${style["user-icon"]}`}
-                ></span>
+                <div className={style["input-wrapper-icon"]}>
+                  <span
+                    className={`${style["input-icon"]} ${style["user-icon"]}`}
+                  ></span>
+                </div>
                 <input
                   placeholder="Name"
                   {...register("name", {
@@ -114,10 +108,11 @@ export default function RegPage() {
                 )}
               </div>
               <div className={style["input-str"]}>
-                <span
-                  className={`${style["input-icon"]} ${style["mobile-icon"]}`}
-                ></span>
-
+                <div className={style["input-wrapper-icon"]}>
+                  <span
+                    className={`${style["input-icon"]} ${style["mobile-icon"]}`}
+                  ></span>
+                </div>
                 <Controller
                   control={control}
                   {...register("phone", {
@@ -148,9 +143,11 @@ export default function RegPage() {
                 )}
               </div>
               <div className={style["input-str"]}>
-                <span
-                  className={`${style["input-icon"]} ${style["email-icon"]}`}
-                ></span>
+                <div className={style["input-wrapper-icon"]}>
+                  <span
+                    className={`${style["input-icon"]} ${style["email-icon"]}`}
+                  ></span>
+                </div>
                 <input
                   placeholder="Email address"
                   type="email"
@@ -171,12 +168,14 @@ export default function RegPage() {
                 )}
               </div>
               <div className={style["input-str"]}>
-                <span
-                  className={`${style["input-icon"]} ${style["password-icon"]}`}
-                ></span>
+                <div className={style["input-wrapper-icon"]}>
+                  <span
+                    className={`${style["input-icon"]} ${style["password-icon"]}`}
+                  ></span>
+                </div>
                 <input
                   placeholder="Password"
-                  type={show ? "text" : "password"}
+                  type={showPassword ? "text" : "password"}
                   {...register("password", {
                     required: "This field is required",
                     minLength: {
@@ -187,10 +186,10 @@ export default function RegPage() {
                 />
                 <div
                   onClick={() => {
-                    setShow((prev) => !prev);
+                    setShowPassword((prev) => !prev);
                   }}
                   className={
-                    show
+                    showPassword
                       ? `${style["password-show"]} ${style["show-true"]}`
                       : `${style["password-show"]} ${style["show-false"]}
             `

@@ -1,15 +1,22 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { UserType } from "../../types";
+import { UserAuthFBType } from "../../types";
 
-const initialState: UserType[] = [];
+const initialState = null as UserAuthFBType | null;
+
 const UserSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setUser(_state, action: PayloadAction<UserType[]>) {
-      return { ...action.payload };
+    setDataAboutUser(
+      _state,
+      action: PayloadAction<UserAuthFBType | null>,
+    ): UserAuthFBType | null {
+      if (!action.payload) return null;
+
+      return action.payload;
     },
   },
 });
-export const { setUser } = UserSlice.actions;
+
+export const { setDataAboutUser } = UserSlice.actions;
 export default UserSlice.reducer;

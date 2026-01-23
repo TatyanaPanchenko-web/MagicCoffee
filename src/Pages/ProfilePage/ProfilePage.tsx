@@ -1,62 +1,61 @@
 import { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import {
-  EmailAuthProvider,
-  updateProfile,
-  reauthenticateWithCredential,
-  verifyBeforeUpdateEmail,
-} from "firebase/auth";
+import { updateProfile, updatePassword } from "firebase/auth";
 import { auth, getDataFromBD, editUserDataBase } from "@/services/fireBase";
 import { signOut } from "firebase/auth";
+import { useAppSelector } from "@/store/index";
 import { UserType } from "@/types";
 import Footer from "@/Components/Footer/Footer";
 import style from "./profilePage.module.scss";
-
 
 type UserField = keyof UserType;
 
 export default function ProfilePage() {
   const user = auth.currentUser;
-  const uid = user?.uid;
+  // const uid = user?.uid;
 
+  const storeUser = useAppSelector((state) => state.user);
+  console.log(storeUser);
   const [userInfo, setUserInfo] = useState<UserType | null>(null);
   const [errorEdit, setErrorEdit] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [isEditing, setIsEditing] = useState({
     name: false,
+    password: false,
     email: false,
     phone: false,
   });
 
   useEffect(() => {
-    if (!uid) return;
-    getDataFromBD<UserType>(`user/${uid}`)
-      .then((data) => setUserInfo(data))
-      .catch((error) => console.error(error));
-  }, [uid]);
+    if (storeUser) {
+      getDataFromBD<UserType>(`user/${storeUser.uid}`)
+        .then((data) => setUserInfo(data))
+        .catch((error) => console.error(error));
+    }
+  }, [storeUser]);
 
   const navigate = useNavigate();
 
   const changeUserInfo = async (place: string, changeInfo: string) => {
-    if (!uid) return;
-    await editUserDataBase(place, changeInfo, uid);
+    if (!user || !storeUser) return;
 
-    const data = await getDataFromBD<UserType>(`user/${uid}`);
-    setUserInfo(data);
+    try {
+      await editUserDataBase(place, changeInfo, storeUser.uid);
 
-    if (place === "name") {
-      await updateProfile(user, {
-        displayName: changeInfo,
-      });
-    }
-    if (place === "email") {
-      if (!user.email) {
-        throw new Error("User email is missing");
+      const data = await getDataFromBD<UserType>(`user/${storeUser.uid}`);
+      setUserInfo(data);
+
+      if (place === "name") {
+        await updateProfile(user, { displayName: changeInfo });
+      } else if (place === "password") {
+        await updatePassword(user, changeInfo);
       }
-
-      const credential = EmailAuthProvider.credential(user.email, "147147");
-
-      await reauthenticateWithCredential(user, credential);
-      await verifyBeforeUpdateEmail(user, changeInfo);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error("Ошибка при обновлении пользователя:", error);
+      } else {
+        console.error("Unknown error", error);
+      }
     }
   };
 
@@ -79,6 +78,7 @@ export default function ProfilePage() {
   const changeEditFlag = (target: string) => {
     setIsEditing({
       name: false,
+      password: false,
       email: false,
       phone: false,
       [target]: true,
@@ -89,7 +89,11 @@ export default function ProfilePage() {
     try {
       await signOut(auth);
     } catch (error) {
-      console.error("Ошибка выхода:", error);
+      if (error instanceof Error) {
+        console.error("Ошибка выхода:", error);
+      } else {
+        console.error("Unknown error", error);
+      }
     }
   };
 
@@ -151,6 +155,69 @@ export default function ProfilePage() {
               )}
             </div>
           </div>
+
+          <div className={style["profile-item"]}>
+            <div className={style["profile-img"]}>
+              <div
+                className={`${style["profile-icon"]} ${style["icon-password"]}`}
+              ></div>
+            </div>
+
+            <div
+              className={`${style["profile-field"]} ${
+                isEditing.password ? style["edit-field"] : ""
+              }`}
+            >
+              {isEditing.password ? (
+                <>
+                  <input
+                    name="password"
+                    type={showPassword ? "text" : "password"}
+                    value={userInfo?.password}
+                    onChange={(e) => {
+                      setErrorEdit(!/^.{6,}$/.test(e.target.value));
+                      updateFieldValue("password", e.target.value);
+                    }}
+                    className={style["profile-edit-text"]}
+                  />
+                  <div
+                    onClick={() => {
+                      setShowPassword((prev) => !prev);
+                    }}
+                    className={
+                      showPassword
+                        ? `${style["password-show"]} ${style["show-true"]}`
+                        : `${style["password-show"]} ${style["show-false"]}
+            `
+                    }
+                  ></div>
+                  <div
+                    onClick={() => {
+                      saveNewValue("password");
+                    }}
+                    className={style["profile-save"]}
+                  ></div>
+                </>
+              ) : (
+                <>
+                  <div className={style["profile-text-group"]}>
+                    <div className={style["profile-subtitle"]}>Password: </div>
+                    <input
+                      name="viewPassword"
+                      type="password"
+                      value={userInfo?.password}
+                      className={style["profile-text"]}
+                    />
+                  </div>
+                  <div
+                    onClick={() => changeEditFlag("password")}
+                    className={style["profile-edit-icon"]}
+                  ></div>
+                </>
+              )}
+            </div>
+          </div>
+
           <div className={style["profile-item"]}>
             <div className={style["profile-img"]}>
               <div
@@ -190,20 +257,18 @@ export default function ProfilePage() {
                 </>
               ) : (
                 <> */}
-                  <div className={style["profile-text-group"]}>
-                    <div className={style["profile-subtitle"]}>Email: </div>
-                    <div className={style["profile-text"]}>
-                      {userInfo?.email}
-                    </div>
-                  </div>
-                  <div
-                    onClick={() => 
-                      // changeEditFlag("email")
-                      navigate("/verification")
-                    }
-                    className={style["profile-edit-icon"]}
-                  ></div>
-                {/* </> */}
+              <div className={style["profile-text-group"]}>
+                <div className={style["profile-subtitle"]}>Email: </div>
+                <div className={style["profile-text"]}>{userInfo?.email}</div>
+              </div>
+              <div
+                onClick={() =>
+                  // changeEditFlag("email")
+                  navigate("/verification")
+                }
+                className={style["profile-edit-icon"]}
+              ></div>
+              {/* </> */}
               {/* )} */}
             </div>
           </div>
@@ -259,6 +324,7 @@ export default function ProfilePage() {
               )}
             </div>
           </div>
+
           {errorEdit ? (
             <div className={style["error-field"]}>
               Field contain invalid data

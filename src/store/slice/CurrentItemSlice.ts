@@ -2,17 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { CoffeeType } from "../../types";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-const initialState: CoffeeType  = {
-  count: 1,
-  id: "",
-  name: "",
-  price: [],
-  ristretto: [],
-  volume: [],
-  where: [],
-};
-// const initialState: CoffeeType | null = null;
 
+const initialState = null as CoffeeType | null;
 const CurrentItemSlice = createSlice({
   name: "currentItem",
   initialState,

@@ -2,6 +2,8 @@
 .footer {
   padding: 16px 25px 22px;
   width: 100%;
+  position: sticky;
+  bottom: 0;
   .footer-inner {
     border-radius: 20px;
     background-color: #fff;

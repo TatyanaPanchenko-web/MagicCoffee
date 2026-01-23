@@ -26,6 +26,7 @@ export function setUserDataBase(data: UserType, uid: string) {
   const dataRef = ref(database, `/user/${uid}`);
   return set(dataRef, {
     name: data.name,
+    password: data.password,
     email: data.email,
     phone: data.phone,
   });

@@ -17,7 +17,7 @@ type FormValuesType = {
 };
 
 export default function AuthPage() {
-  const [show, setShow] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [errAuth, setErrAuth] = useState(false);
   const isLoading = useAppSelector((state) => state.preloader);
   const dispatch = useAppDispatch();
@@ -57,7 +57,11 @@ export default function AuthPage() {
         <div className={style["auth-subtitle"]}>Welcome back</div>
         <form onSubmit={handleSubmit(onSubmit)} className={style["auth-form"]}>
           <div className={style["input-str"]}>
-            <span className={style["email-icon"]}></span>
+            <div className={style["input-wrapper-icon"]}>
+              <span
+                className={`${style["input-icon"]} ${style["email-icon"]}`}
+              ></span>
+            </div>
             <input
               placeholder="Email address"
               {...register("email", {
@@ -77,10 +81,14 @@ export default function AuthPage() {
             )}
           </div>
           <div className={style["input-str"]}>
-            <div className={style["password-icon"]}></div>
+            <div className={style["input-wrapper-icon"]}>
+              <span
+                className={`${style["input-icon"]} ${style["password-icon"]}`}
+              ></span>
+            </div>
             <input
               placeholder="Password"
-              type={show ? "text" : "password"}
+              type={showPassword ? "text" : "password"}
               {...register("password", {
                 required: "Must be filled in",
                 minLength: {
@@ -91,10 +99,10 @@ export default function AuthPage() {
             />
             <div
               onClick={() => {
-                setShow((prev) => !prev);
+                setShowPassword((prev) => !prev);
               }}
               className={
-                show
+                showPassword
                   ? `${style["password-show"]} ${style["show-true"]}`
                   : `${style["password-show"]} ${style["show-false"]}
             `

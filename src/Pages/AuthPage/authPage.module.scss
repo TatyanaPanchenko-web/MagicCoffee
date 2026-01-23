@@ -41,25 +41,28 @@
         font-size: 12px;
         color: #c1c7d0;
       }
-      .email-icon {
-        background-image: url("/img/form/message.png");
-        background-position: center;
-        background-repeat: no-repeat;
+      .input-wrapper-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 36px;
         height: 36px;
-        flex-shrink: 0;
         border-right: 1px solid #c1c7d0;
-      }
-      .password-icon {
-        background-image: url("/img/form/lock.png");
-        background-position: center;
-        background-repeat: no-repeat;
-        width: 36px;
-        height: 36px;
-        display: block;
         flex-shrink: 0;
-        border-right: 1px solid #c1c7d0;
+        .input-icon {
+          background-repeat: no-repeat;
+          background-size: contain;
+          width: 18px;
+          height: 18px;
+        }
+        .email-icon {
+          background-image: url("/img/icons/message.svg");
+        }
+        .password-icon {
+          background-image: url("/img/icons/lock.svg");
+        }
       }
+
       .password-show {
         background-position: center;
         background-repeat: no-repeat;
@@ -98,7 +101,7 @@
     font-size: 12px;
     padding-left: 40px;
     padding-right: 5px;
-       &-right {
+    &-right {
       text-align: right;
     }
   }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { RootStateType, useAppDispatch } from "@/store/index";
+import { useAppSelector, useAppDispatch } from "@/store/index";
 import Header from "@/Components/Header/Header";
 import Footer from "@/Components/Footer/Footer";
 import CoffeeItem from "@/Components/CoffeeItem/CoffeeItem";
@@ -20,12 +20,10 @@ type UserFromDB = {
 
 export default function CoffeeListPage() {
   const [currentUser, setCurrentUser] = useState<UserType | null>(null);
-  const isLoading = useSelector((state: RootStateType) => state.preloader);
+  const isLoading = useAppSelector((state) => state.preloader);
   const dispatch = useAppDispatch();
 
-  const getCoffeeStore = useSelector(
-    (state: RootStateType) => state.coffeeList,
-  );
+  const getCoffeeStore = useAppSelector((state) => state.coffeeList);
   const user = auth.currentUser;
   const uid = user?.uid;
   useEffect(() => {

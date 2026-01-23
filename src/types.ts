@@ -20,7 +20,13 @@ export type CartType = {
 
 export type UserType = {
   name: string;
+  password: string;
   email: string;
   phone: string;
-  password: string;
+};
+
+export type UserAuthFBType = {
+  name: string;
+  email: string ;
+  uid: string;
 };

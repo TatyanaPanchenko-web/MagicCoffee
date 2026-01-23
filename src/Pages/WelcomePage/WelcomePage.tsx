@@ -1,31 +1,11 @@
-import { useState, useEffect } from "react";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "@/services/fireBase";
+
 import { NavLink } from "react-router-dom";
+import { useAppSelector } from "@/store/index";
 import style from "./welcomePage.module.scss";
 
+
 export default function WelcomePage() {
-  const [userAuth, setUserAuth] = useState(false);
-
-  useEffect(() => {
-    const getUser = onAuthStateChanged(auth, (user) => {
-      if (user) {
-             setUserAuth(true);
-        // const getUserFromBD: Promise<UserInfoType | null> = getDataFromBD(
-        //   `users/${user.uid}`
-        // );
-        // getUserFromBD.then((result) => {
-        //   setUserInfo(result);
-        // });
-      } else {
-        setUserAuth(false);
-      }
-    });
-    return () => {
-      getUser();
-    };
-  }, []);
-
+   const storeUser = useAppSelector((state) => state.user);
   return (
     <div className={style["welcomepage"]}>
       <div className={style["welcomepage-logo"]}></div>
@@ -34,7 +14,7 @@ export default function WelcomePage() {
       </div>
       <div className={style["welcomepage-subtitle"]}>Magic coffee on order</div>
       <div className={style["welcomepage-button"]}>
-        {userAuth ? (
+        {storeUser ? (
           <NavLink to="/menu">
             <div className={style["welcomepage-btn"]}></div>
           </NavLink>

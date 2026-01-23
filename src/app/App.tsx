@@ -1,4 +1,9 @@
-import { Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "@/services/fireBase";
+import { useAppDispatch } from "@/store/index";
+import { setDataAboutUser } from "@/store/slice/UserSlice";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import WelcomePage from "@/Pages/WelcomePage/WelcomePage";
 import CoffeeListPage from "@/Pages/CoffeeListPage/CoffeeListPage";
 import AuthPage from "@/Pages/AuthPage/AuthPage";
@@ -9,9 +14,30 @@ import VerificationPage from "@/Pages/VerificationPage/VerificationPage";
 import OrderPage from "@/Pages/OrderPage/OrderPage";
 import CartPage from "@/Pages/CartPage/CartPage";
 import FinishPage from "@/Pages/FinishPage/FinishPage";
+
 import style from "./app.module.scss";
 
 export default function App() {
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    const getUser = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        dispatch(
+          setDataAboutUser({
+            name: user.displayName ?? "",
+            email: user.email ?? "",
+            uid: user.uid ?? "",
+          }),
+        );
+      } else {
+        dispatch(setDataAboutUser(null));
+      }
+    });
+    return () => {
+      getUser();
+    };
+  }, []);
+
   return (
     <div className={style.container}>
       <Routes>
