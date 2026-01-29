@@ -1,13 +1,15 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "@/store/index";
-import { addOrder } from "@/store/slice/OrderSlice";
 import { deleteAllCart } from "@/store/slice/CartSlice";
 import { totalPrice } from "@/common/cartFunction";
 import CartItem from "@/Components/CartItem/CartItem";
 import Footer from "@/Components/Footer/Footer";
+import { setOrderDataBase } from "@/services/fireBase";
+
 import style from "./cartPage.module.scss";
 
 export default function OrderPage() {
+  const uid = useAppSelector((state) => state.user.userInfo?.uid);
   const getCartItems = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -37,7 +39,10 @@ export default function OrderPage() {
             disabled={getCartItems.length === 0 ? true : false}
             onClick={() => {
               if (getCartItems.length === 0) return;
-              dispatch(addOrder(getCartItems));
+              if (uid) {
+                setOrderDataBase(getCartItems, uid);
+              }
+              // dispatch(addOrder(getCartItems));
               dispatch(deleteAllCart());
               navigate("/finish");
             }}
@@ -47,7 +52,7 @@ export default function OrderPage() {
           </button>
         </div>
       </div>
-      <Footer />
+      <Footer activeItem={"cart"} />
     </>
   );
 }

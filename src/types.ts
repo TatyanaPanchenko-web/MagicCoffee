@@ -17,7 +17,11 @@ export type CartType = {
   volume: number;
   where: string;
 };
+export type OrdersListType = {
+  date:string,
+  items:CartType[]
 
+}
 export type UserType = {
   name: string;
   password: string;
@@ -27,6 +31,6 @@ export type UserType = {
 
 export type UserAuthFBType = {
   name: string;
-  email: string ;
+  email: string;
   uid: string;
 };

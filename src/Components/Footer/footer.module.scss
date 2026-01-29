@@ -19,19 +19,8 @@
         background-size: fill;
         background-position: center;
       }
-      .icon-home {
-        background-image: url("/img/footer/home.svg");
-      }
-      .icon-gift {
-        background-image: url("/img/footer/gift.png");
-      }
-      .icon-cart {
-        background-image: url("/img/footer/cart.svg");
-      }
     }
   }
-}
-.footer.footer-light {
 }
 .footer.footer-dark {
   background-color: vars.$accentColor;

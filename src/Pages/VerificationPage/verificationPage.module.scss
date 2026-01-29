@@ -37,7 +37,7 @@
     .input-str {
       display: flex;
       align-items: center;
-      border-bottom: 1px solid #c1c7d0;
+      border-bottom: 1px solid vars.$borderColor;
       margin-bottom: 36px;
 
       input {
@@ -50,26 +50,28 @@
       input::placeholder {
         font-family: "Poppins", sans-serif;
         font-size: 12px;
-        color: #c1c7d0;
+        color: vars.$borderColor;
       }
-      .email-icon {
-        background-image: url("/img/icons/message.svg");
-        background-position: center;
-        background-repeat: no-repeat;
+      .input-wrapper-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 36px;
         height: 36px;
+        border-right: 1px solid vars.$borderColor;
         flex-shrink: 0;
-        border-right: 1px solid #c1c7d0;
-      }
-      .password-icon {
-        background-image: url("/img/icons/lock.svg");
-        background-position: center;
-        background-repeat: no-repeat;
-        width: 36px;
-        height: 36px;
-        display: block;
-        flex-shrink: 0;
-        border-right: 1px solid #c1c7d0;
+        .input-icon {
+          background-repeat: no-repeat;
+          background-size: contain;
+          width: 18px;
+          height: 18px;
+        }
+        .email-icon {
+          background-image: url("/img/icons/message.svg");
+        }
+        .password-icon {
+          background-image: url("/img/icons/lock.svg");
+        }
       }
 
       .password-show {

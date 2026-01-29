@@ -1,5 +1,4 @@
-
-import {  useAppSelector, useAppDispatch } from "@/store/index";
+import { useAppSelector, useAppDispatch } from "@/store/index";
 import { useNavigate } from "react-router-dom";
 import { setCurrentItem } from "@/store/slice/CurrentItemSlice";
 import style from "./coffeeItem.module.scss";
@@ -12,13 +11,13 @@ export default function CoffeeItem() {
   return (
     <>
       {getCoffeeStore.map((item, index) => {
-      
         return (
           <div
             className={style["coffee-item"]}
             key={index}
             onClick={() => {
-              dispatch(setCurrentItem(item));
+              localStorage.setItem("currentItem", JSON.stringify(item));
+              // dispatch(setCurrentItem(item));
               navigate(`/order`);
             }}
           >

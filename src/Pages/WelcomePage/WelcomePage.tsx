@@ -1,11 +1,9 @@
-
 import { NavLink } from "react-router-dom";
 import { useAppSelector } from "@/store/index";
 import style from "./welcomePage.module.scss";
 
-
 export default function WelcomePage() {
-   const storeUser = useAppSelector((state) => state.user);
+  const storeUser = useAppSelector((state) => state.user.userInfo);
   return (
     <div className={style["welcomepage"]}>
       <div className={style["welcomepage-logo"]}></div>

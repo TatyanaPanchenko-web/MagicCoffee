@@ -1,0 +1,61 @@
+@use "@/style/vars.scss";
+.list-inner {
+  padding: 27px 26px 0;
+  flex: 1 1 auto;
+  .list-top {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 115px;
+    .list-back {
+      background-image: url("/img/icons/back.png");
+      background-repeat: no-repeat;
+      width: 24px;
+      height: 24px;
+    }
+    .list-title {
+      font-size: 20px;
+      color: #001833;
+      margin-bottom: 30px;
+    }
+  }
+  .list-wrapper {
+    margin-bottom: 50px;
+    text-align: center;
+    .list-order {
+      border-bottom: 1px solid vars.$borderColor;
+      margin-bottom: 30px;
+      display: flex;
+      justify-content: space-between;
+      .list-left {
+        .list-date {
+          font-size: 12px;
+          color: vars.$borderColor;
+        }
+        .list-item {
+          margin-bottom: 15px;
+          display: flex;
+          text-align-last: left;
+          gap: 20px;
+          .list-img {
+            background-image: url("/img/icons/coffee.svg");
+            background-repeat: no-repeat;
+            background-size: contain;
+            width: 20px;
+            height: 20px;
+            align-self: center;
+          }
+          .list-info {
+            font-size: 12px;
+            span {
+              color: vars.$borderColor;
+            }
+          }
+        }
+      }
+      .list-right {
+        padding-top: 15px;
+      }
+    }
+  }
+}

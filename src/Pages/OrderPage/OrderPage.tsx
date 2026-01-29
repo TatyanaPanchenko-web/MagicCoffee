@@ -5,13 +5,14 @@ import { addItemCart } from "@/store/slice/CartSlice";
 import Footer from "@/Components/Footer/Footer";
 import IconsSvg from "./IconsSvg";
 import style from "./orderPage.module.scss";
-import { CartType } from "@/types";
+import { CartType, CoffeeType } from "@/types";
 
 type ActiveItemKeyType = "ristretto" | "where" | "volume";
 
-
 export default function OrderPage() {
-  const getCurrentItem = useAppSelector((state) => state.currentItem);
+  const item = localStorage.getItem("currentItem");
+  const getCurrentItem: CoffeeType | null = item ? JSON.parse(item) : null;
+
   if (!getCurrentItem) return null;
   const [activeItem, setActiveItem] = useState({
     ristretto: 0,

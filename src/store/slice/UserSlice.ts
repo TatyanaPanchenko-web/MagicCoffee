@@ -1,22 +1,29 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { UserAuthFBType } from "../../types";
 
-const initialState = null as UserAuthFBType | null;
+type initialType = {
+  userInfo: UserAuthFBType | null;
+  loadingStatus: boolean;
+};
+const initialState: initialType = {
+  userInfo: null,
+  loadingStatus: false,
+};
 
 const UserSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setDataAboutUser(
-      _state,
-      action: PayloadAction<UserAuthFBType | null>,
-    ): UserAuthFBType | null {
-      if (!action.payload) return null;
+    setDataAboutUser(state, action: PayloadAction<UserAuthFBType | null>) {
+      if (!action.payload) return { ...state, userInfo: null };
 
-      return action.payload;
+      return { ...state, userInfo: action.payload };
+    },
+    changeLoadingStatus(state) {
+      state.loadingStatus = true;
     },
   },
 });
 
-export const { setDataAboutUser } = UserSlice.actions;
+export const { setDataAboutUser, changeLoadingStatus } = UserSlice.actions;
 export default UserSlice.reducer;

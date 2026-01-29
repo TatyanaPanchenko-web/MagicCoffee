@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import coffeeListReducer from "./slice/CoffeeListSlice";
 import currentReducer from "./slice/CurrentItemSlice";
 import cartReducer from "./slice/CartSlice";
-import orderReducer from "./slice/OrderSlice";
+// import orderReducer from "./slice/OrderSlice";
+import ordersListReducer from "./slice/ListOrdersSlice";
 import preloaderReducer from "./slice/PreloaderSlice";
 import userReducer from "./slice/UserSlice";
 
@@ -12,7 +13,8 @@ export const store = configureStore({
     coffeeList: coffeeListReducer,
     currentItem: currentReducer,
     cart: cartReducer,
-    order: orderReducer,
+    // order: orderReducer,
+    ordersList: ordersListReducer,
     preloader: preloaderReducer,
     user: userReducer,
   },

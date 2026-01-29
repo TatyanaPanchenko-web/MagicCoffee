@@ -1,27 +1,23 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { auth } from "@/services/fireBase";
-import { CartType } from "../../types";
+// import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+// import { auth } from "@/services/fireBase";
+// import { CartType } from "../../types";
 
-type OrderType = {
-  items: CartType[];
-  date: string;
-  uid: string;
-};
-const initialState: OrderType[] = [];
-const OrderSlice = createSlice({
-  name: "order",
-  initialState,
+// const initialState: CartType[] = [];
 
-  reducers: {
-    addOrder(state, action: PayloadAction<CartType[]>) {
-      if (!auth.currentUser) return;
-      state.push({
-        items: action.payload,
-        date: new Date().toLocaleString("ru-RU"),
-        uid: auth?.currentUser?.uid,
-      });
-    },
-  },
-});
-export const { addOrder } = OrderSlice.actions;
-export default OrderSlice.reducer;
+// const OrderSlice = createSlice({
+//   name: "order",
+//   initialState,
+
+//   reducers: {
+//     addOrder(state, action: PayloadAction<CartType[]>) {
+//       if (!auth.currentUser) return;
+//       state.push({
+//         items: action.payload,
+//         date: new Date().toLocaleString("ru-RU"),
+//         uid: auth?.currentUser?.uid,
+//       });
+//     },
+//   },
+// });
+// export const { addOrder } = OrderSlice.actions;
+// export default OrderSlice.reducer;
