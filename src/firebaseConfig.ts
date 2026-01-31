@@ -1,9 +1,9 @@
 export const firebaseConfig = {
-  apiKey: "AIzaSyA8rB7egRJjNS34QN_VEIEsZUhX2flkDBk",
-  authDomain: "magiccoffee-d17d0.firebaseapp.com",
-  projectId: "magiccoffee-d17d0",
-  storageBucket: "magiccoffee-d17d0.firebasestorage.app",
-  messagingSenderId: "884228389930",
-  appId: "1:884228389930:web:3aa65c571c64678df1d753",
-  measurementId: "G-57NDT6N9JB",
+  apiKey: import.meta.env.VITE_API_KEY,
+  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_APP_ID,
+  measurementId: import.meta.env.VITE_MEASUREMENT_ID,
 };
