@@ -15,10 +15,12 @@ export default function WelcomePage() {
         {storeUser ? (
           <NavLink to="/menu">
             <div className={style["welcomepage-btn"]}></div>
+            <span className={"text-hidden"}>Continue</span>
           </NavLink>
         ) : (
           <NavLink to="/auth">
             <div className={style["welcomepage-btn"]}></div>
+            <span className={"text-hidden"}>Continue</span>
           </NavLink>
         )}
       </div>

@@ -5,12 +5,13 @@
   .profile-top {
     margin-bottom: 30px;
     display: flex;
+    gap: 130px;
+
     .profile-back {
       background-image: url("/img/icons/back.png");
       background-repeat: no-repeat;
       width: 24px;
       height: 24px;
-      padding-right: 130px;
     }
     .profile-title {
       font-size: 20px;
@@ -84,12 +85,13 @@
         right: 30px;
         top: 50%;
         transform: translateY(-50%);
-
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
         height: 17px;
         margin-right: 10px;
+        background-color: transparent;
+        border: none;
       }
 
       .show-false {
@@ -104,8 +106,8 @@
       .profile-edit-text {
         width: 100%;
         border: none;
-        outline: none;
         padding: 10px;
+        margin-right: 10px;
         font-family: "Poppins", sans-serif;
         font-size: 14px;
       }
@@ -116,6 +118,8 @@
         height: 24px;
         align-self: center;
         margin-left: auto;
+        background-color: transparent;
+        border: none;
         cursor: pointer;
       }
       .profile-save {
@@ -127,6 +131,8 @@
         align-self: center;
         margin-left: auto;
         margin-right: 5px;
+        background-color: transparent;
+        border: none;
         cursor: pointer;
       }
     }
@@ -144,12 +150,15 @@
     .profile-button {
       background-color: vars.$accentColor;
       color: #fff;
+      font-family: "Poppins", sans-serif;
+      font-weight: 500;
       border-radius: 30px;
       height: 46px;
       width: 165px;
       display: flex;
       justify-content: center;
       align-items: center;
+      border: none;
       cursor: pointer;
     }
   }

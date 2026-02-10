@@ -8,9 +8,14 @@ import { setOrderDataBase } from "@/services/fireBase";
 
 import style from "./cartPage.module.scss";
 
-export default function OrderPage() {
+type CartPageProps = {
+  setFlag: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export default function CartPage({ setFlag }: CartPageProps) {
   const uid = useAppSelector((state) => state.user.userInfo?.uid);
   const getCartItems = useAppSelector((state) => state.cart);
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -20,6 +25,7 @@ export default function OrderPage() {
         <div className={style["cart-top"]}>
           <NavLink to="/menu">
             <div className={style["cart-back"]}></div>
+            <span className={"text-hidden"}>Back</span>
           </NavLink>
           <div className={style["cart-title"]}>My order</div>
         </div>
@@ -44,6 +50,7 @@ export default function OrderPage() {
               }
               // dispatch(addOrder(getCartItems));
               dispatch(deleteAllCart());
+              setFlag((prev) => !prev);
               navigate("/finish");
             }}
             className={style["cart-button"]}

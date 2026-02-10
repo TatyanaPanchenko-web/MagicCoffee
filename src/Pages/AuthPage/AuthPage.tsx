@@ -48,6 +48,7 @@ export default function AuthPage() {
     <div className={style["auth-inner"]}>
       <NavLink to="/">
         <div className={style["auth-back"]}></div>
+        <span className={"text-hidden"}>Back</span>
       </NavLink>
       <div className={style["auth-title"]}>Sign in</div>
       <div className={style["auth-subtitle"]}>Welcome back</div>
@@ -93,7 +94,8 @@ export default function AuthPage() {
               },
             })}
           />
-          <div
+          <button
+            type="button"
             onClick={() => {
               setShowPassword((prev) => !prev);
             }}
@@ -103,7 +105,11 @@ export default function AuthPage() {
                 : `${style["password-show"]} ${style["show-false"]}
             `
             }
-          ></div>
+          >
+            <span className={"text-hidden"}>
+              {showPassword ? "Password show" : "Password hidden"}
+            </span>
+          </button>
           {errors.password && (
             <p
               className={`${style["errorField"]} ${style["errorField-right"]}`}
@@ -116,12 +122,12 @@ export default function AuthPage() {
           <div className={style.errorField}>Incorrect password or login</div>
         )}
 
-        <input type="submit" value="" />
+        <input type="submit" value="" aria-label="Submit form" />
       </form>
 
       <div className={style["auth-link"]}>
-        New member?
-        <NavLink to="/reg"> Sign up</NavLink>
+        New member? &nbsp;
+        <NavLink to="/reg">Sign up</NavLink>
       </div>
     </div>
   );

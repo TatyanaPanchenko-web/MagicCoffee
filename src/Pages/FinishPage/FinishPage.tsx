@@ -7,6 +7,7 @@ export default function FinishPage() {
       <div className={style["finish-top"]}>
         <NavLink to="/menu">
           <div className={style["finish-back"]}></div>
+          <span className={"text-hidden"}>Back to menu</span>
         </NavLink>
       </div>
       <div className={style["finish-title"]}>Ordered</div>

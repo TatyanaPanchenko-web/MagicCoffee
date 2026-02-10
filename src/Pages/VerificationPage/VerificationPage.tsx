@@ -40,7 +40,7 @@ export default function VerificationPage() {
 
   const onSubmit = async (data: FormValuesType) => {
     dispatch(activatePreloader());
-        setErrAuth(false);
+    setErrAuth(false);
     try {
       if (!user?.email) {
         throw new Error("You need to sign in to continue");
@@ -69,13 +69,14 @@ export default function VerificationPage() {
 
   return (
     <div className={style["verification-inner"]}>
+      <div className={style["verification-top"]}>
+        <NavLink to="/profile">
+          <div className={style["verification-back"]}></div>
+          <span className={"text-hidden"}>Back</span>
+        </NavLink>
+      </div>
       {successMessage.status ? (
         <>
-          <div className={style["verification-top"]}>
-            <NavLink to="/profile">
-              <div className={style["verification-back"]}></div>
-            </NavLink>
-          </div>
           <div className={style["success-message"]}>
             A confirmation email has been sent to your new email address:
             <span> {successMessage.newEmail}</span>. Check your inbox and follow
@@ -84,15 +85,11 @@ export default function VerificationPage() {
         </>
       ) : (
         <>
-          <div className={style["verification-top"]}>
-            <NavLink to="/profile">
-              <div className={style["verification-back"]}></div>
-            </NavLink>
-            <div className={style["verification-title"]}>Change Email</div>
-            <div className={style["verification-subtitle"]}>
-              Enter your new email and current password to confirm
-            </div>
+          <div className={style["verification-title"]}>Change Email</div>
+          <div className={style["verification-subtitle"]}>
+            Enter your new email and current password to confirm
           </div>
+
           <div className={style["verification-wrapper"]}>
             <form
               onSubmit={handleSubmit(onSubmit)}
@@ -139,17 +136,22 @@ export default function VerificationPage() {
                     },
                   })}
                 />
-                <div
+                <button
+                  type="button"
                   onClick={() => {
                     setShowPassword((prev) => !prev);
                   }}
                   className={
                     showPassword
-                      ? `${style["password-showPassword"]} ${style["showPassword-true"]}`
-                      : `${style["password-showPassword"]} ${style["showPassword-false"]}
+                      ? `${style["password-show"]} ${style["show-true"]}`
+                      : `${style["password-show"]} ${style["show-false"]}
             `
                   }
-                ></div>
+                >
+                  <span className={"text-hidden"}>
+                    {showPassword ? "Password show" : "Password hidden"}
+                  </span>
+                </button>
                 {errors.password && (
                   <p
                     className={`${style["errorField"]} ${style["errorField-right"]}`}

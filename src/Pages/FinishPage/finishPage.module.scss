@@ -8,12 +8,15 @@
     padding-top: 20px;
     margin-bottom: 120px;
     align-self: start;
+    a {
+      display: inline-block;
+      margin-bottom: 24px;
+    }
     .finish-back {
       background-image: url("/img/icons/back.png");
       background-repeat: no-repeat;
       width: 24px;
       height: 24px;
-      margin-bottom: 24px;
     }
   }
   .finish-title {

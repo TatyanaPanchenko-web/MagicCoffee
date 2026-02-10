@@ -1,34 +1,28 @@
-import { useAppSelector, useAppDispatch } from "@/store/index";
+import { useAppSelector } from "@/store/index";
 import { useNavigate } from "react-router-dom";
-import { setCurrentItem } from "@/store/slice/CurrentItemSlice";
 import style from "./coffeeItem.module.scss";
 
 export default function CoffeeItem() {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
   const getCoffeeStore = useAppSelector((state) => state.coffeeList);
 
   return (
     <>
       {getCoffeeStore.map((item, index) => {
         return (
-          <div
+          <button
             className={style["coffee-item"]}
             key={index}
             onClick={() => {
               localStorage.setItem("currentItem", JSON.stringify(item));
-              // dispatch(setCurrentItem(item));
               navigate(`/order`);
             }}
           >
             <div className={style["coffee-img"]}>
-              <img
-                src={`/img/coffee/coffee_${item.name}.png`}
-                alt={item.name}
-              />
+              <img src={`/img/coffee/coffee_${item.name}.png`} alt="" />
             </div>
             <div className={style["coffee-name"]}>{item.name}</div>
-          </div>
+          </button>
         );
       })}
     </>

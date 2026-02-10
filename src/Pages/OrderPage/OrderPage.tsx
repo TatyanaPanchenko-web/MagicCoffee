@@ -75,6 +75,7 @@ export default function OrderPage() {
         <div className={style["order-top"]}>
           <NavLink to="/menu">
             <div className={style["order-back"]}></div>
+            <span className={"text-hidden"}>Back</span>
           </NavLink>
           <div className={style["order-title"]}>Order</div>
         </div>
@@ -88,21 +89,28 @@ export default function OrderPage() {
           <div className={style["order-info-item"]}>
             <div className={style["order-name"]}>{getCurrentItem.name}</div>
             <div className={style["order-count"]}>
-              <span
+              <button
                 onClick={() => {
                   getCountItem(false);
                 }}
               >
+                <span
+                  className={"text-hidden"}
+                >{`Count ${orderInfo.count}, decrease`}</span>
                 -
-              </span>
-              {orderInfo.count}
-              <span
-                onClick={() => {
+              </button>
+              <span> {orderInfo.count}</span>
+
+              <button
+                               onClick={() => {
                   getCountItem(true);
                 }}
               >
+                <span
+                  className={"text-hidden"}
+                >{`Count ${orderInfo.count}, increase`}</span>
                 +
-              </span>
+              </button>
             </div>
           </div>
           <div className={style["order-info-item"]}>
@@ -112,7 +120,7 @@ export default function OrderPage() {
             >
               {getCurrentItem.ristretto.map((item, index) => {
                 return (
-                  <div
+                  <button
                     onClick={() => {
                       checkElement("ristretto", index);
                     }}
@@ -121,8 +129,8 @@ export default function OrderPage() {
                     }`}
                     key={index}
                   >
-                    <span>{item}</span>
-                  </div>
+                    {item}
+                  </button>
                 );
               })}
             </div>
@@ -136,7 +144,7 @@ export default function OrderPage() {
             >
               {getCurrentItem.where.map((item, index) => {
                 return (
-                  <div
+                  <button
                     onClick={() => {
                       checkElement("where", index);
                     }}
@@ -146,7 +154,8 @@ export default function OrderPage() {
                     key={index}
                   >
                     <IconsSvg id={`${item}`} />
-                  </div>
+                    <span className={"text-hidden"}>{item}</span>
+                  </button>
                 );
               })}
             </div>
@@ -160,7 +169,7 @@ export default function OrderPage() {
             >
               {getCurrentItem.volume.map((item, index) => {
                 return (
-                  <div
+                  <button
                     onClick={() => {
                       checkElement("volume", index);
                     }}
@@ -171,7 +180,7 @@ export default function OrderPage() {
                   >
                     <IconsSvg id={`Volume${item}`} />
                     <span>{item}</span>
-                  </div>
+                  </button>
                 );
               })}
             </div>
@@ -184,7 +193,7 @@ export default function OrderPage() {
             ,00
           </span>
         </div>
-        <div
+        <button
           onClick={() => {
             dispatch(addItemCart(orderInfo));
             navigate("/cart");
@@ -192,7 +201,7 @@ export default function OrderPage() {
           className={style["order-button"]}
         >
           Add to cart
-        </div>
+        </button>
       </div>
       <Footer bg={"light"} />
     </>

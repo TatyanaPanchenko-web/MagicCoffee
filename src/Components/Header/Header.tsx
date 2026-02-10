@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import style from "./header.module.scss";
 
 export default function Header() {
-
   const name = auth.currentUser?.displayName;
 
   return (
@@ -16,6 +15,7 @@ export default function Header() {
         <div className={style["header-icons"]}>
           <NavLink to="/profile">
             <div className={style["header-profile"]}></div>
+            <span className={"text-hidden"}>Go to profile</span>
           </NavLink>
         </div>
       </div>

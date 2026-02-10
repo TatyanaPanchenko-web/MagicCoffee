@@ -102,6 +102,7 @@ export default function ProfilePage() {
       <div className={style["profile-top"]}>
         <NavLink to="/menu">
           <div className={style["profile-back"]}></div>
+          <span className={"text-hidden"}>Back</span>
         </NavLink>
         <div className={style["profile-title"]}>Profile</div>
       </div>
@@ -131,12 +132,14 @@ export default function ProfilePage() {
                   className={style["profile-edit-text"]}
                 />
 
-                <div
+                <button
                   onClick={() => {
                     saveNewValue("name");
                   }}
                   className={style["profile-save"]}
-                ></div>
+                >
+                  <span className={"text-hidden"}>Save</span>
+                </button>
               </>
             ) : (
               <>
@@ -144,10 +147,12 @@ export default function ProfilePage() {
                   <div className={style["profile-subtitle"]}>Name: </div>
                   <div className={style["profile-text"]}>{userInfo?.name}</div>
                 </div>
-                <div
+                <button
                   onClick={() => changeEditFlag("name")}
                   className={style["profile-edit-icon"]}
-                ></div>
+                >
+                  <span className={"text-hidden"}>Edit</span>
+                </button>
               </>
             )}
           </div>
@@ -177,7 +182,7 @@ export default function ProfilePage() {
                   }}
                   className={style["profile-edit-text"]}
                 />
-                <div
+                <button
                   onClick={() => {
                     setShowPassword((prev) => !prev);
                   }}
@@ -187,29 +192,40 @@ export default function ProfilePage() {
                       : `${style["password-show"]} ${style["show-false"]}
             `
                   }
-                ></div>
-                <div
+                >
+                  <span className={"text-hidden"}>
+                    {showPassword ? "Password show" : "Password hidden"}
+                  </span>
+                </button>
+                <button
                   onClick={() => {
                     saveNewValue("password");
                   }}
                   className={style["profile-save"]}
-                ></div>
+                >
+                  <span className={"text-hidden"}>Save</span>
+                </button>
               </>
             ) : (
               <>
                 <div className={style["profile-text-group"]}>
                   <div className={style["profile-subtitle"]}>Password: </div>
+
                   <input
                     name="viewPassword"
                     type="password"
-                    value={userInfo?.password}
+                    tabIndex={-1}
+                    value={userInfo?.password ?? ""}
                     className={style["profile-text"]}
+                    readOnly
                   />
                 </div>
-                <div
+                <button
                   onClick={() => changeEditFlag("password")}
                   className={style["profile-edit-icon"]}
-                ></div>
+                >
+                  <span className={"text-hidden"}>Edit</span>
+                </button>
               </>
             )}
           </div>
@@ -230,10 +246,12 @@ export default function ProfilePage() {
               <div className={style["profile-subtitle"]}>Email: </div>
               <div className={style["profile-text"]}>{userInfo?.email}</div>
             </div>
-            <div
+            <button
               onClick={() => navigate("/verification")}
               className={style["profile-edit-icon"]}
-            ></div>
+            >
+              <span className={"text-hidden"}>Edit</span>
+            </button>
           </div>
         </div>
 
@@ -265,12 +283,14 @@ export default function ProfilePage() {
                   className={style["profile-edit-text"]}
                 />
 
-                <div
+                <button
                   onClick={() => {
                     saveNewValue("phone");
                   }}
                   className={style["profile-save"]}
-                ></div>
+                >
+                  <span className={"text-hidden"}>Save</span>
+                </button>
               </>
             ) : (
               <>
@@ -278,10 +298,12 @@ export default function ProfilePage() {
                   <div className={style["profile-subtitle"]}>Phone: </div>
                   <div className={style["profile-text"]}>{userInfo?.phone}</div>
                 </div>
-                <div
+                <button
                   onClick={() => changeEditFlag("phone")}
                   className={style["profile-edit-icon"]}
-                ></div>
+                >
+                  <span className={"text-hidden"}>Edit</span>
+                </button>
               </>
             )}
           </div>
@@ -294,7 +316,7 @@ export default function ProfilePage() {
         )}
       </div>
       <div className={style["profile-bottom"]}>
-        <div
+        <button
           onClick={() => {
             userSignOut();
             navigate("/");
@@ -302,7 +324,7 @@ export default function ProfilePage() {
           className={style["profile-button"]}
         >
           Sign out
-        </div>
+        </button>
       </div>
     </div>
   );

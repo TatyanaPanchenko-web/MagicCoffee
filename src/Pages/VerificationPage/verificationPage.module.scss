@@ -13,23 +13,25 @@
   }
   .verification-top {
     margin-bottom: 30px;
+    a {
+      display: inline-block;
+    }
     .verification-back {
       background-image: url("/img/icons/back.png");
       background-repeat: no-repeat;
       width: 24px;
       height: 24px;
-      margin-bottom: 24px;
     }
-    .verification-title {
-      font-size: 20px;
-      color: #001833;
-      margin-bottom: 24px;
-    }
-    .verification-subtitle {
-      font-weight: 400;
-      margin-bottom: 46px;
-      color: vars.$shadowColor;
-    }
+  }
+  .verification-title {
+    font-size: 20px;
+    color: #001833;
+    margin-bottom: 24px;
+  }
+  .verification-subtitle {
+    font-weight: 400;
+    margin-bottom: 76px;
+    color: vars.$shadowColor;
   }
   .verification-wrapper {
     position: relative;
@@ -42,8 +44,7 @@
 
       input {
         border: none;
-        outline: none;
-        padding-left: 19px;
+        padding: 10px 0 10px 19px;
         flex: 1 1 auto;
         min-width: 0;
       }
@@ -79,7 +80,10 @@
         background-repeat: no-repeat;
         background-size: cover;
         height: 17px;
-        margin-right: 20px;
+        margin: 0 10px;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
       }
 
       .show-false {
@@ -104,7 +108,6 @@
       justify-content: center;
       align-items: center;
       border: none;
-      outline: none;
       font-family: "Poppins", sans-serif;
       font-weight: 500;
       font-size: 14px;

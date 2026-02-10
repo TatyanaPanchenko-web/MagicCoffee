@@ -6,6 +6,7 @@ export default function TermsOfUsePage() {
     <div className={style["terms-inner"]}>
       <NavLink to="/reg">
         <div className={style["terms-back"]}></div>
+        <span className={"text-hidden"}>Back</span>
       </NavLink>
       <div className={style["terms-container"]}>
         <div className={style["terms-title"]}> Terms of Use </div>
@@ -43,7 +44,8 @@ export default function TermsOfUsePage() {
         </p>
         <div className={style["terms-subtitle"]}> 3. Orders and Payment</div>
         <p>
-          3.1. The User may place orders through the website or application.{" "}
+          3.1. The User may place orders through the website or
+          application.{" "}
         </p>
         <p>
           3.2. All prices are displayed in the national currency and include
@@ -107,7 +109,7 @@ export default function TermsOfUsePage() {
           7.2. Personal data processing is carried out in accordance with the
           Privacy Policy.
         </p>
-          <div className={style["terms-subtitle"]}>
+        <div className={style["terms-subtitle"]}>
           8. Limitation of Liability
         </div>
         <p>

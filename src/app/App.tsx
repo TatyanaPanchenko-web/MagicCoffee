@@ -28,8 +28,9 @@ import { CoffeeType, OrdersListType } from "@/types";
 
 export default function App() {
   const [uid, setUid] = useState<string | null>(null);
+  const [flag, setFlag] = useState(false);
   const dispatch = useAppDispatch();
-
+ 
   useEffect(() => {
     dispatch(activatePreloader());
     const getUser = onAuthStateChanged(auth, (user) => {
@@ -58,13 +59,14 @@ export default function App() {
     const getListOrders = getDataFromBD<{ [uid: string]: OrdersListType[] }>(
       "orders",
     );
-   
+
     Promise.allSettled([getCoffeeBase, getListOrders]).then((results) => {
+     
       if (results[0].status === "fulfilled") {
         dispatch(setCoffee(results[0].value));
       }
       if (results[1].status === "fulfilled" && results[1].value) {
-               if (uid) {
+        if (uid) {
           const userOrders = results[1].value[uid];
           if (userOrders) {
             dispatch(addOrderToList(userOrders));
@@ -73,7 +75,7 @@ export default function App() {
       }
       dispatch(deactivatePreloader());
     });
-  }, [uid]);
+  }, [flag, uid]);
 
   return (
     <div className={style.container}>
@@ -88,7 +90,7 @@ export default function App() {
           <Route path="/profile" element={<ProfilePage />}></Route>
           <Route path="/verification" element={<VerificationPage />}></Route>
           <Route path="/order" element={<OrderPage />}></Route>
-          <Route path="/cart" element={<CartPage />}></Route>
+          <Route path="/cart" element={<CartPage setFlag={setFlag} />}></Route>
           <Route path="/list" element={<ListOrdersPage />}></Route>
           <Route path="/finish" element={<FinishPage />}></Route>
         </Route>

@@ -3,12 +3,15 @@
   padding: 27px 26px 0;
   width: 100%;
   align-self: start;
+  a {
+    display: inline-block;
+    margin-bottom: 46px;
+  }
   .auth-back {
     background-image: url("/img/icons/back.png");
     background-repeat: no-repeat;
     width: 24px;
     height: 24px;
-    margin-bottom: 46px;
   }
   .auth-title {
     font-size: 20px;
@@ -22,7 +25,6 @@
   }
   .auth-form {
     display: flex;
-
     flex-direction: column;
     gap: 36px;
     .input-str {
@@ -31,8 +33,7 @@
       border-bottom: 1px solid vars.$borderColor;
       input {
         border: none;
-        outline: none;
-        padding-left: 19px;
+        padding: 10px 0 10px 19px;
         flex: 1 1 auto;
         min-width: 0;
       }
@@ -68,7 +69,9 @@
         background-repeat: no-repeat;
         background-size: cover;
         height: 17px;
-        margin-right: 20px;
+        margin: 0 10px;
+        background-color: transparent;
+        border: none;
       }
 
       .show-false {
@@ -92,7 +95,6 @@
       cursor: pointer;
       margin-top: 150px;
       align-self: flex-end;
-      outline: none;
       border: none;
     }
   }

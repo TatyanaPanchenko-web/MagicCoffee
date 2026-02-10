@@ -1,5 +1,6 @@
 @use "@/style/vars.scss";
 .coffee-item {
+  border: none;
   border-radius: 15px;
   background-color: vars.$bgColor;
   width: 154px;

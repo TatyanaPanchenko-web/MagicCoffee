@@ -7,6 +7,7 @@ import style from "./listOrdersPage.module.scss";
 
 export default function ListOrdersPage() {
   const listOrders = useAppSelector((state) => state.ordersList);
+  const arrayOfOrders = Object.values(listOrders).reverse();
 
   return (
     <>
@@ -14,19 +15,22 @@ export default function ListOrdersPage() {
         <div className={style["list-top"]}>
           <NavLink to="/menu">
             <div className={style["list-back"]}></div>
+            <span className={"text-hidden"}>Back</span>
           </NavLink>
           <div className={style["list-title"]}>My orders</div>
         </div>
         <div className={style["list-wrapper"]}>
           {listOrders.length === 0 && <div>You don’t have any orders yet</div>}
-          {Object.values(listOrders).map((el) => (
-            <div className={style["list-order"]}>
+
+          {arrayOfOrders.map((el, index) => (
+            <div className={style["list-order"]} key={index}>
               <div className={style["list-left"]}>
                 <div className={style["list-date"]}>
                   {el.date.slice(0, 10)} | {el.date.slice(11, 17)}
                 </div>
+
                 {el.items.map((item) => (
-                  <div className={style["list-item"]}>
+                  <div className={style["list-item"]} key={item.id}>
                     <div className={style["list-img"]}></div>
                     <div>
                       <div className={style["list-name"]}>{item.name}</div>

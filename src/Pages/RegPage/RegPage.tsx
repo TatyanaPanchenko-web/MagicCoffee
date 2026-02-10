@@ -61,6 +61,7 @@ export default function RegPage() {
     <div className={style["reg-inner"]}>
       <NavLink to="/">
         <div className={style["reg-back"]}></div>
+        <span className={"text-hidden"}>Back</span>
       </NavLink>
 
       {successMessage ? (
@@ -177,7 +178,8 @@ export default function RegPage() {
                   },
                 })}
               />
-              <div
+              <button
+                type="button"
                 onClick={() => {
                   setShowPassword((prev) => !prev);
                 }}
@@ -187,7 +189,11 @@ export default function RegPage() {
                     : `${style["password-show"]} ${style["show-false"]}
             `
                 }
-              ></div>
+              >
+                 <span className={"text-hidden"}>
+              {showPassword ? "Password show" : "Password hidden"}
+            </span>
+              </button>
               {errors.password && (
                 <p
                   className={`${style["errorField"]} ${style["errorField-right"]}`}
@@ -206,11 +212,11 @@ export default function RegPage() {
               <Link to="/terms">Terms of Use</Link>
             </div>
 
-            <input type="submit" value="" />
+            <input type="submit" value="" aria-label="Submit form" />
           </form>
           <div className={style["reg-link"]}>
-            Already a member?
-            <NavLink to="/auth"> Sign in</NavLink>
+            Already a member? &nbsp;
+            <NavLink to="/auth">Sign in</NavLink>
           </div>
         </div>
       )}

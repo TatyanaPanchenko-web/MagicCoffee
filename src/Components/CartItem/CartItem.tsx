@@ -4,16 +4,15 @@ import { deleteItemCart } from "@/store/slice/CartSlice";
 import { CartType } from "@/types";
 
 type CartItemPropsType = {
-  item:CartType
-}
-export default function CartItem({ item }:CartItemPropsType) {
- 
+  item: CartType;
+};
+export default function CartItem({ item }: CartItemPropsType) {
   const dispatch = useAppDispatch();
   return (
     <div className={style["cart-item"]}>
-      <div className={style["cart-wrapper"]}>
+      <div role="button" tabIndex={0} className={style["cart-wrapper"]}>
         <div className={style["cart-img"]}>
-          <img src={`/img/coffee/coffee_${item.name}.png`} alt={item.name} />
+          <img src={`/img/coffee/coffee_${item.name}.png`} alt="" />
         </div>
         <div className={style["cart-info"]}>
           <div className={style["cart-name"]}>{item.name}</div>
@@ -26,14 +25,15 @@ export default function CartItem({ item }:CartItemPropsType) {
           {item.price * item.count},00
         </div>
       </div>
-      <div
+      <button
         onClick={() => {
           dispatch(deleteItemCart(item));
         }}
         className={style["cart-delete"]}
       >
-        <div className={style["cart-delete-img"]}> </div>
-      </div>
+        <div className={style["cart-delete-img"]}></div>
+        <span className={"text-hidden"}>{`Delete ${item.name}`}</span>
+      </button>
     </div>
   );
 }

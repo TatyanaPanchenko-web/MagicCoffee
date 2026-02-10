@@ -26,6 +26,7 @@ export default function Footer({ bg, activeItem }: FooterProps) {
         <div className={style["footer-icons"]}>
           <NavLink to="/menu">
             <div
+              className={style["footer-icon"]}
               onClick={() => {
                 setIsActiveItem(() => ({
                   menu: true,
@@ -36,10 +37,12 @@ export default function Footer({ bg, activeItem }: FooterProps) {
             >
               <IconMenu isActiveItem={isActiveItem.menu} />
             </div>
+            <span className={"text-hidden"}>Go to menu</span>
           </NavLink>
+
           <NavLink to="/list">
-            <IconList isActiveItem={isActiveItem.orders} />
             <div
+              className={style["footer-icon"]}
               onClick={() => {
                 setIsActiveItem(() => ({
                   menu: false,
@@ -47,11 +50,15 @@ export default function Footer({ bg, activeItem }: FooterProps) {
                   cart: false,
                 }));
               }}
-            ></div>
+            >
+              <IconList isActiveItem={isActiveItem.orders} />
+            </div>
+            <span className={"text-hidden"}>Go to list</span>
           </NavLink>
 
           <NavLink to="/cart">
             <div
+              className={style["footer-icon"]}
               onClick={() => {
                 setIsActiveItem(() => ({
                   menu: false,
@@ -62,6 +69,7 @@ export default function Footer({ bg, activeItem }: FooterProps) {
             >
               <IconCart isActiveItem={isActiveItem.cart} />
             </div>
+            <span className={"text-hidden"}>Go to cart</span>
           </NavLink>
         </div>
       </div>
