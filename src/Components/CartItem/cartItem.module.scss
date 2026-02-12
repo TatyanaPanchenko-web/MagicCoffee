@@ -50,7 +50,6 @@
     border: none;
     cursor: pointer;
     opacity: 0;
-    visibility: hidden;
     transition:
       transform 0.6s ease,
       opacity 0.6s ease,
@@ -76,5 +75,4 @@
 .cart-item:hover .cart-delete,
 .cart-item:focus-within .cart-delete {
   opacity: 1;
-  visibility: visible;
 }
